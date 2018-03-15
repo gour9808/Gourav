@@ -1,0 +1,20 @@
+<div class="sidebar" fxLayout="column">
+  <div class="app-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5%">
+    <img class="logo" src="assets/logo.png" />
+    <span class="app-name"></span>
+  </div>
+  <ul class="nav navbar-nav sider-navbar">
+    <li id="profile" style="width: 100%;">
+<figure class="profile-userpic">
+  <img *ngIf="userInfo.profilePictureUrl" [src]="userInfo.profilePictureUrl" class="img-responsive" alt="Profile Picture">
+</figure>
+<div class="profile-usertitle">
+  <div class="profile-usertitle-name">Gourav Sharma </div>
+  <div class="profile-usertitle-title">9983419808</div>
+</div>
+</li>
+<a *ngFor="let menuItem of menu">
+  <app-list-item *ngIf="!menuItem.children && menuItem.active" [label]="menuItem.name" [icon]="menuItem.icon" [path]="menuItem.path"></app-list-item>
+</a>
+</ul>
+</div>

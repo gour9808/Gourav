@@ -1,0 +1,4 @@
+<div fxLayout="column" class="input-group">
+  <span class="input-label">{{label}}</span>
+  <p-dropdown [options]="list" [(ngModel)]="value" placeholder="Select Availability" (onChange)="onSelected()" autoWidth="false"></p-dropdown>
+</div>

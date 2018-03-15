@@ -1,0 +1,119 @@
+<div class="grid-container">
+
+    <div fxLayout="row" fxLayoutGap="2%">
+        <app-circular-progress [showDialog]="loadingRequest" *ngIf="loadingRequest" message="Please Wait"></app-circular-progress>
+        <div fxLayout="column" fxFlex>
+            <div class="box">
+                <div fxLayout="row">
+                    <div fxLayout="column" fxFlex>
+                        <div class="avatar-flip" style="background-image: url(../../assets/old.png);"></div>
+</div>
+<div fxLayout="column" fxLayoutAlign="center" fxFlex>
+    <div class="detail">
+        <span class="number">{{userInfo.age}}</span>
+        <span>Age</span>
+    </div>
+</div>
+</div>
+<div class="dob" fxLayout="row">Date of Birth : {{userInfo.dateOfBirth | date}}</div>
+</div>
+
+
+</div>
+<div fxLayout="column" fxFlex>
+    <div class="box1">
+        <div fxLayout="row">
+            <div fxLayout="column" fxFlex>
+                <div class="avatar-flip" style="background-image: url(../../assets/WEIGHT.png);"></div>
+</div>
+<div fxLayout="column" fxLayoutAlign="center" fxFlex>
+    <div class="detail">
+        <span class="number1">{{ weightValue ? weightValue.value : '--' }} kg</span>
+        <span style="color: white;">Weight</span>
+</div>
+</div>
+</div>
+<div class="dob1" fxLayout="row">Weight : {{ weightValue ? weightValue.value : '--' }} kg</div>
+</div>
+
+
+</div>
+<div fxLayout="column" fxFlex>
+    <div class="box">
+        <div fxLayout="row">
+            <div fxLayout="column" fxFlex>
+                <div class="avatar-flip" style="background-image: url(../../assets/visit.png);"></div>
+</div>
+<div fxLayout="column" fxLayoutAlign="center" fxFlex>
+    <div class="detail">
+        <span *ngIf="visitCount" class="number">{{visitCount}}</span>
+        <span *ngIf="!visitCount" class="number">0</span>
+        <span>Visits</span>
+    </div>
+</div>
+</div>
+<div class="dob" *ngIf="lastVisit" fxLayout="row">last visit : {{lastVisit | date}}</div>
+<div class="dob" *ngIf="!lastVisit" fxLayout="row">last visit : No records found</div>
+</div>
+
+</div>
+<div fxLayout="column" fxFlex>
+    <div class="box2">
+        <div fxLayout="row">
+            <div fxLayout="column" fxFlex>
+                <div class="avatar-flip" style="background-image: url(../../assets/family.jpg);"></div>
+</div>
+<div fxLayout="column" fxLayoutAlign="center" fxFlex>
+    <div class="detail">
+        <span class="number2">{{family}}</span>
+        <span style="color: white">Family</span>
+</div>
+</div>
+</div>
+<div class="dob2" fxLayout="row">Family Members</div>
+</div>
+</div>
+</div>
+</div>
+
+<div fxLayout="row">
+    <app-card title="All Visits" expanded="true" fxFlex>
+        <div class="chart" style="width: 100%;" >
+
+<p-accordion>
+    <p-accordionTab [header]="accordian.createTime | date" [selected]="true" *ngFor="let accordian of accordians">
+        <!--<div fxLayoutAlign="end">
+            <i class="fa fa-print" title="Print Report"></i>
+        </div>-->
+        <div fxLayout="row">
+            <div class="visit-grid-container">
+                <div fxLayout="column" *ngFor="let test of noOfTests">
+                    <div class="box3">
+                        <div fxLayout="row">
+                            <div fxLayout="column" fxFlex>
+                                <div class="avatar-flip" [ngStyle]="{ 'background-image': 'url(' + test.image + ')'}"></div>
+                            </div>
+                            <div fxLayout="column" fxLayoutAlign="center" fxFlex>
+                                <div class="detail">
+                                     <span class="test-name">{{ test.name }}</span>
+                                    <div class="number3" *ngFor="let result of test.result">
+                                        <span>{{result.name}} - {{result.value}} {{result.unit}}</span>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </p-accordionTab>
+
+</p-accordion>
+
+</div>
+</app-card>
+</div>

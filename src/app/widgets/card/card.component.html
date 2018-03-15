@@ -1,0 +1,11 @@
+<div class="card md-whiteframe-z1" fxLayout="column">
+  <div class="card-title" fxLayoutAlign="start center" fxLayout="row" fxLayoutGap="1%">
+    <i class="material-icons" *ngIf="showBack" (click)="back()">arrow_back</i>
+    <span fxFlex>{{title}}</span>
+    <div layout="row" *ngIf="showExpansion">
+      <i class="material-icons ripple" *ngIf="!expanded" (click)="expanded = true">expand_more</i>
+      <i class="material-icons ripple" *ngIf="expanded" (click)="expanded = false">expand_less</i>
+    </div>
+  </div>
+    <ng-content *ngIf="expanded" class="card-body"></ng-content>
+</div>

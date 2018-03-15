@@ -1,0 +1,16 @@
+.material-icons {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.menu-item {
+  padding: 8px;
+   border-bottom: .5px solid #f1f1f1;
+  color: rgba(0, 0, 0, 0.6);
+  span {
+    margin-left: 8px;
+  }
+  &:hover {
+    background: #f1f1f1;
+    cursor: pointer;
+  }
+}

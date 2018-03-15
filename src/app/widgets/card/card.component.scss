@@ -1,0 +1,39 @@
+.card {
+    background: #FFFFFF;
+    margin: 10px;
+    min-width: 100px;
+    min-height: 100px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    .card-title {
+        background: #FFFFFF;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+        font-size: 20px;
+        line-height: 36px;
+        padding: 10px;
+        font-weight: bold;
+    }
+    &.medium {
+        min-height: 400px;
+    }
+    &.small {
+        min-height: 250px;
+    }
+    .material-icons {
+        cursor: pointer;
+    }
+    .card-body {
+        padding: 16px;
+    }
+    .scrollable {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        &:hover {
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+    }
+    .large {
+        min-width: 350px;
+        min-height: 400px;
+    }
+}

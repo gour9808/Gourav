@@ -1,0 +1,4 @@
+<div fxLayout="column" class="input-group">
+  <span class="input-label">{{label}}</span>
+  <input type="number" step=any [placeholder]="placeholder" [(ngModel)]="model" (keyup)="onInputChanged()" />
+</div>
