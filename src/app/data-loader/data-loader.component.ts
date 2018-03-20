@@ -22,9 +22,7 @@ export class DataLoaderComponent implements OnInit {
     }
 
     fetchUserInfo() {
-     
-            this.router.navigate(['/home/customer/dashboard'])
-       
+        this.router.navigate(['/home/customer/dashboard'])
     }
 
 }
