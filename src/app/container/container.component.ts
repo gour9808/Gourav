@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import * as _ from 'lodash';
+import { Cache } from '../service/storage.provider';
 
 @Component({
   selector: 'app-container',
@@ -9,6 +10,7 @@ import * as _ from 'lodash';
 })
 export class ContainerComponent implements OnInit {
   showSidenav: boolean = true;
+  @Cache({ pool: 'User' }) userInfo: any;
 
   show: string;
   menuItems = [{
@@ -34,7 +36,7 @@ export class ContainerComponent implements OnInit {
   ];
 
   constructor(private router: Router, private currentRoute: ActivatedRoute) {
-   
+    this.show = "Welcome" + " " + this.userInfo.firstName
   }
 
   ngOnInit() {

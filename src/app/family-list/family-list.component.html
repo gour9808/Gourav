@@ -1,0 +1,26 @@
+<h2 class="family">Others With this Phone</h2>
+<app-circular-progress [showDialog]="loadingRequest" message="Please Wait"></app-circular-progress>
+
+<div fxLayout="row" >
+ <div class="visit-grid-container">
+  <div fxLayout="column" *ngFor="let family of noOfFamily">
+    <div class="box3">
+      <div class="avatar-flip">
+        <i *ngIf="!family.profilePictureUrl" class="fa fa-user-circle icon"></i>
+
+       <img *ngIf="family.profilePictureUrl" [src]="family.profilePictureUrl" height="150" width="150">
+
+      </div>
+      <h2>{{family.firstName}} {{family.lastName}}</h2>
+      <div class="details">
+        <p>Age : {{family.age}}</p>
+        <p> Email: {{family.email ? family.email: 'Not Provided'}}</p>
+        <p>{{family.dial_code}}{{family.phone}}</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</div>

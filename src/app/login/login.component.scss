@@ -1,0 +1,30 @@
+.btn {
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    outline: 0;
+    text-decoration: none;
+    color: #fff;
+    background-color: #0ac;
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+}
+
+.login {}
+
+.title {
+    font-size: 5rem;
+    margin: 12px;
+}
+
+.sub-title {
+    font-size: 2rem;
+    margin: 12px;
+}
