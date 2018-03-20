@@ -9,17 +9,18 @@ import { Router } from '@angular/router';
 export class DataLoaderComponent implements OnInit {
     times = [{ odd: true }, { odd: false }, { odd: true }, { odd: false }];
 
-    constructor( private router: Router) {
+    constructor(private router: Router) {
     }
 
     ngOnInit() {
         console.log('Init Data Loader');
         this.fetchUserInfo();
-
     }
 
     fetchUserInfo() {
-        this.router.navigate(['/home/customer/dashboard'])
+        setTimeout(() => {
+        }, 5000)
+        this.router.navigate(['/home/my/dashboard'])
     }
 
 }
