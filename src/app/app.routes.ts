@@ -13,11 +13,11 @@ import { DataLoaderComponent } from './data-loader/data-loader.component';
 export const appRoutes: Routes = [
     { path: '', redirectTo: 'load', pathMatch: 'full' },
     { path: 'auth', component: LoginComponent },
-    { path: 'auth/callback', component: CallbackComponent },
-     { path: 'load', component: DataLoaderComponent, canActivate: [OAuthGuard] },
+  //  { path: 'auth/callback', component: CallbackComponent },
+     { path: 'load', component: DataLoaderComponent },
 
     {
-        path: 'home', component: ContainerComponent, canActivate: [OAuthGuard],
+        path: 'home', component: ContainerComponent,
         children: [
             { path: '', redirectTo: 'customer', pathMatch: 'full' },
             {

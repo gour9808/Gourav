@@ -10,7 +10,6 @@ import { Cache } from '../service/storage.provider';
 })
 export class ContainerComponent implements OnInit {
   showSidenav: boolean = true;
-  @Cache({ pool: 'User' }) userInfo: any;
 
   show: string;
   menuItems = [{
@@ -36,7 +35,7 @@ export class ContainerComponent implements OnInit {
   ];
 
   constructor(private router: Router, private currentRoute: ActivatedRoute) {
-    this.show = "Welcome" + " " + this.userInfo.firstName
+   
   }
 
   ngOnInit() {

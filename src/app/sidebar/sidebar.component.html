@@ -6,12 +6,12 @@
   <ul class="nav navbar-nav sider-navbar">
     <li id="profile" style="width: 100%;">
 <figure class="profile-userpic">
-  <i *ngIf="!userInfo.profilePictureUrl" class="fa fa-user-circle icon"></i>
-  <img *ngIf="userInfo.profilePictureUrl" [src]="userInfo.profilePictureUrl" class="img-responsive" alt="Profile Picture">
+  
+  <img  src="assets/logo.png" class="img-responsive" alt="Profile Picture">
 </figure>
 <div class="profile-usertitle">
-  <div class="profile-usertitle-name">{{userInfo.firstName}} {{userInfo.lastName}} </div>
-  <div class="profile-usertitle-title">{{userInfo.dial_code}}{{userInfo.phone}}</div>
+  <div class="profile-usertitle-name">Gourav Sharma </div>
+  <div class="profile-usertitle-title">9983419808</div>
 </div>
 </li>
 <a *ngFor="let menuItem of menu">

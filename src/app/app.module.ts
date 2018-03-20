@@ -33,7 +33,6 @@ import { TestsComponent } from './tests/tests.component';
 import { MenuItemComponent } from './widgets/menu-item/menu-item.component';
 import { ListItemComponent } from './list-item/list-item.component';
 import { ChartModule } from 'primeng/primeng';
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { FamilyListComponent } from './family-list/family-list.component';
 import { LoginComponent } from './login/login.component';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
@@ -85,7 +84,7 @@ import { PlaceholdersComponent } from './widgets/placeholders/placeholders.compo
 
   ],
   imports: [
-    RouterModule.forRoot(appRoutes), ToastModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,

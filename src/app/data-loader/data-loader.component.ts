@@ -22,13 +22,9 @@ export class DataLoaderComponent implements OnInit {
     }
 
     fetchUserInfo() {
-        this.user.fetchUserInfo().subscribe(userInfo => {
-            console.log('User info is', userInfo);
-            this.userInfo = userInfo;
+     
             this.router.navigate(['/home/customer/dashboard'])
-        }, error => {
-            this.router.navigate(['/auth']);
-        });
+       
     }
 
 }
