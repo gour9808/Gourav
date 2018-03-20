@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
-import { Cache } from '../service/storage.provider';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +8,6 @@ import { Cache } from '../service/storage.provider';
 })
 export class SidebarComponent implements OnInit {
 
-  @Cache({ pool: 'User' }) userInfo: any;
   @Input() menu: Array<Object>;
   version = environment.version;
 
@@ -17,7 +15,6 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     console.log("Init Sidebar");
-    console.log("side bar user info", this.userInfo);
     console.log(this.menu);
 
   }

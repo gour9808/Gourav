@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import * as _ from 'lodash';
-import { Cache } from '../service/storage.provider';
 
 @Component({
   selector: 'app-container',
@@ -15,23 +14,23 @@ export class ContainerComponent implements OnInit {
   menuItems = [{
     name: "Dashboard",
     icon: "fa-dashboard",
-    path: "/home/customer",
+    path: "/home/my",
     active: true
   },
 
-  {
-    name: "Trends",
-    icon: "fa-line-chart",
-    path: "/home/test",
-    active: true
-  },
-  {
-    name: "Family",
-    icon: "fa-users",
-    path: "/home/family",
-    active: true,
+  // {
+  //   name: "Trends",
+  //   icon: "fa-line-chart",
+  //   path: "/home/test",
+  //   active: true
+  // },
+  // {
+  //   name: "Family",
+  //   icon: "fa-users",
+  //   path: "/home/family",
+  //   active: true,
 
-  },
+  // },
   ];
 
   constructor(private router: Router, private currentRoute: ActivatedRoute) {

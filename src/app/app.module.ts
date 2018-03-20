@@ -29,24 +29,14 @@ import { SizePipe } from './utils/pipes/size.pipe';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { DashTileComponent } from './widgets/dash-tile/dash-tile.component';
-import { TestsComponent } from './tests/tests.component';
 import { MenuItemComponent } from './widgets/menu-item/menu-item.component';
 import { ListItemComponent } from './list-item/list-item.component';
 import { ChartModule } from 'primeng/primeng';
-import { FamilyListComponent } from './family-list/family-list.component';
 import { LoginComponent } from './login/login.component';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import { OAuthGuard } from './login/oauthguard.service';
-import { CallbackComponent } from './login/callback.component';
-import { AuthService } from './service/auth.service';
-import { WindowService } from './service/window.service';
-import { Communicator } from "./service/communicator.service";
-import { DataStorageService } from './service/data-storage.service';
+
 import { InputFieldMultipleOptionComponent } from './widgets/input-field-multiple-option/input-field-multiple-option.component';
-import { UserService } from './service/user.service';
-import { HttpInterceptorService } from './interceptor/http.interceptor.service';
 import { DataLoaderComponent } from './data-loader/data-loader.component';
-import { StorageService } from './service/storage.provider';
 import { SplashLoaderComponent } from './splash-loader/splash-loader.component';
 import { TableModule } from 'primeng/table'; 
 import { PlaceholdersComponent } from './widgets/placeholders/placeholders.component';
@@ -59,7 +49,6 @@ import { PlaceholdersComponent } from './widgets/placeholders/placeholders.compo
     SidebarComponent,
     ToolbarComponent,
     ContainerComponent,
-    CallbackComponent,
     LoaderComponent,
     CircularProgressComponent,
     InputFieldTextComponent,
@@ -72,10 +61,8 @@ import { PlaceholdersComponent } from './widgets/placeholders/placeholders.compo
     InputFieldMultipleOptionComponent,
     SizePipe,
     DashboardComponent,
-    TestsComponent,
     MenuItemComponent,
     ListItemComponent,
-    FamilyListComponent,
     LoginComponent,
     DataLoaderComponent,
     SplashLoaderComponent,PlaceholdersComponent
@@ -108,12 +95,7 @@ import { PlaceholdersComponent } from './widgets/placeholders/placeholders.compo
     GMapModule,
     NgxChartsModule
   ],
-  providers: [ {
-            provide: HTTP_INTERCEPTORS,
-            useClass: HttpInterceptorService,
-            multi: true
-        }, OAuthGuard,UserService, AuthService, WindowService, Communicator, DataStorageService, StorageService
-        ],
+  providers: [],
 
   bootstrap: [AppComponent]
 })

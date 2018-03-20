@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
-import { Cache } from '../service/storage.provider';
 
 @Component({
     selector: 'app-data-loader',
@@ -9,10 +7,9 @@ import { Cache } from '../service/storage.provider';
     styleUrls: ['./data-loader.component.scss']
 })
 export class DataLoaderComponent implements OnInit {
-    @Cache({ pool: 'User' }) userInfo: any;
     times = [{ odd: true }, { odd: false }, { odd: true }, { odd: false }];
 
-    constructor(private user: UserService, private router: Router) {
+    constructor( private router: Router) {
     }
 
     ngOnInit() {

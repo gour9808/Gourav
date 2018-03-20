@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
-import { Cache } from '../service/storage.provider';
 
 @Component({
   selector: 'app-toolbar',
@@ -13,7 +12,6 @@ import { Cache } from '../service/storage.provider';
 })
 export class ToolbarComponent implements OnInit {
 
-  @Cache({ pool: 'User' }) userInfo: any;
   @Input() title: String;
   @Output() toggleSidenav = new EventEmitter<any>();
   @ViewChild('popOutButton') elementView: ElementRef;
