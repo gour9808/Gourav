@@ -1,0 +1,5 @@
+<div class="tab-bar" fxLayout="row" fxLayoutAlign="start center">
+  <div *ngFor="let tab of tabs" [routerLink]="tab.path" routerLinkActive="active" class="title" fxLayout="row" fxLayoutAlign="center center">
+    <span>{{tab.name}}</span>
+  </div>
+</div>

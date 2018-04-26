@@ -2,6 +2,11 @@
   <i class="material-icons" (click)="toggle()">menu</i>
   <span class="title" fxFlex>{{title}}</span>
   <div fxLayout="row" class="user-info" fxLayoutAlign="center center">
-<i class="material-icons avatar" #popOutButton routerLink="/auth" style="color:#FFFFFF;font-size:32px;">power_settings_new</i>
-</div>
+    <div fxLayout="column" class="user-info">
+      <span class="name">{{userInfo.displayname}}</span>
+      <span class="email">{{userInfo.currentEMail}}</span>
+    </div>
+    <i class="material-icons avatar" #popOutButton (click)="togglePopout()" style="color:#FFFFFF;font-size:32px;">account_circle</i>
+    <i class="material-icons avatar" #popOutButton routerLink="/auth" style="color:#FFFFFF;font-size:32px;">power_settings_new</i>
+  </div>
 </div>

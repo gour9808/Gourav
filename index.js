@@ -34,7 +34,7 @@ app.use(function(req, res, next) {
 });
 
 var router = express.Router(express);
-app.use("/ezdx-patient-ui", router);
+app.use("/carbook-data-manager", router);
 
 router.use(express.static(path.join(__dirname, 'dist')));
 

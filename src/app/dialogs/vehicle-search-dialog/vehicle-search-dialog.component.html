@@ -1,0 +1,14 @@
+<div fxLayout="column">
+  <div fxLayout="column">
+    <app-input-field-text fxFlex label="Make" placeholder="Enter Vehicle Make" [(model)]="search.make"></app-input-field-text>
+    <app-input-field-text fxFlex label="Model" placeholder="Enter Vehicle Model" [(model)]="search.model"></app-input-field-text>
+    <app-input-field-text fxFlex label="Variant" placeholder="Enter Vehicle Variant" [(model)]="search.variant"></app-input-field-text>
+    <app-input-field-options fxFlex label="Country" placeH="Select Country" [reset]="reset" [list]="countries" (selected)="search.country = $event"></app-input-field-options>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="2%" style="margin:12px">
+    <app-button (click)="resetSearch()" title="Reset"></app-button>
+    <app-button [disabled]="!goForSearch()" (click)="searchVehicle()" title="Search"></app-button>
+  </div>
+</div>
+
+<app-circular-progress [showDialog]="showDialog" message="Please Wait"></app-circular-progress>

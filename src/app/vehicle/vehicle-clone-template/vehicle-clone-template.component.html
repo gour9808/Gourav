@@ -1,0 +1,26 @@
+<div fxLayout="column">
+  <app-card title="How to create a Service Template" expanded="true" showExpansion="true">
+    <div fxLayout="column">
+      <ul> 
+        <li>Search for Vehicle using Make,Model,Variant and Country</li>
+        <li>Search will show the list of service for that vehicle if found</li>
+        <li>To add a new Service item for that vehicle, fill in the Add Sevice Item form</li>
+        <li>If a partiular part is not available, then add it using add New Part form</li>
+        <li>If you want to clone a service from another variant, search for the source variant and enter the destination variant</li>
+      </ul>
+    </div>
+  </app-card>
+
+  <app-card title="Clone Service & Parts" expanded="true">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2%" style="margin:12px">
+
+
+<app-button (click)="save()"  title="Clone existing parts Entry"></app-button>
+
+
+<app-button (click)="goToVehicleClone()" title="Clone Existing Vehicle Entry"></app-button>
+</div>
+</app-card>
+
+
+</div>

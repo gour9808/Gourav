@@ -1,0 +1,525 @@
+<app-card *ngIf="gotVehicle" title="Create New Vehicle" expanded="true" showBack=true (onBackPressed)="cancelEdit()">
+  <p-accordion [multiple]="true">
+    <p-accordionTab header="Basic Info (Mandatory)" [selected]="true" [disabled]="true">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <app-input-field-text label="Make" placeholder="Enter Vehicle Make" [(model)]="vehicle.make"></app-input-field-text>
+          <app-input-field-text label="Model" placeholder="Enter Vehicle Model" [(model)]="vehicle.model"></app-input-field-text>
+          <app-input-field-text label="Variant" placeholder="Enter Vehicle Variant" [(model)]="vehicle.variant"></app-input-field-text>
+          <app-input-field-options label="Country" placeH="Select Country" [list]="countries" [value]="vehicle.countryCode" (selected)="vehicle.countryCode = $event"></app-input-field-options>
+          <app-input-field-number label="Price" placeholder="Enter Vehicle Price" [(model)]="vehicle.price.exShowroomPrice"></app-input-field-number>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-multiple label="Colors" placeholder="Enter Vehicle Colors" [(model)]="vehicle.colors"></app-input-field-multiple>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Dimensions">
+      <div fxLayout="row">
+        <app-input-field-options label="Body Type" [list]="bodyType" [value]="vehicle.bodyType" placeH="Choose Body Type" (selected)="vehicle.bodyType = $event"></app-input-field-options>
+        <app-input-field-number label="Length(mm)" placeholder="Enter  Length in mm" [(model)]="vehicle.dimensions.length"></app-input-field-number>
+        <app-input-field-number label="Width(mm)" placeholder="Enter Width in mm" [(model)]="vehicle.dimensions.width"></app-input-field-number>
+        <app-input-field-number label="Height(mm)" placeholder="Enter Height in mm" [(model)]="vehicle.dimensions.height"></app-input-field-number>
+      </div>
+      <div fxLayout="row">      
+          <app-input-field-text label="Chassis type" placeholder="Enter Chassis Type" errorMessage="Invalid Entry" [(model)]="vehicle.chassisType"></app-input-field-text>
+        <app-input-field-number label="Wheel Base(mm)" placeholder="Enter Wheel Base in mm" [(model)]="vehicle.dimensions.wheelbase"></app-input-field-number>
+        <app-input-field-number label="Groud Clearance" placeholder="Enter Ground Clearance" errorMessage="Invalid Entry" [(model)]="vehicle.dimensions.groundClearance"></app-input-field-number>
+        <app-input-field-number label="Kerb Weight(kg)" placeholder="Enter Kerb Weight in kg" errorMessage="Invalid Entry" [(model)]="vehicle.dimensions.kerbWeight"></app-input-field-number>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Capacity">
+      <div fxLayout="row">
+        <app-input-field-number label="Doors" placeholder="Enter Number of Doors" [(model)]="vehicle.capacity.doors"></app-input-field-number>
+        <app-input-field-number label="Seating" placeholder="Enter Seating Capacity" [(model)]="vehicle.capacity.seating"></app-input-field-number>
+        <app-input-field-number label="Seating Rows" placeholder="Enter Seating Rows" [(model)]="vehicle.capacity.seatingRows"></app-input-field-number>
+        <app-input-field-number label="BootSpace(litres)" placeholder="Enter Bootspace in litres" errorMessage="Invalid Entry" [(model)]="vehicle.capacity.bootspace"></app-input-field-number>
+        <app-input-field-number label="Fuel Tank Capacity(litres)" placeholder="Enter Fuel Tank Capacity in litres" errorMessage="Invalid Entry"
+          [(model)]="vehicle.capacity.fuelTankCapacity"></app-input-field-number>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Compression Ratio">
+      <div fxLayout="row">
+        <app-input-field-number label="Max" placeholder="Enter Max Compression Ratio" [(model)]="vehicle.engineTransmission.compressionRatio.max"></app-input-field-number>
+        <app-input-field-number label="Min" placeholder="Enter Min Compression Ratio" [(model)]="vehicle.engineTransmission.compressionRatio.min"></app-input-field-number>
+      </div>
+    </p-accordionTab>
+  <p-accordionTab header="Charger">
+      <div fxLayout="row">
+        <app-input-field-options label="Charger Type" [list]="chargerType" placeH="Choose charger type" (selected)="vehicle.engineTransmission.charger.chargerType = $event"></app-input-field-options>
+        <app-input-field-text label="Configuration" placeholder="Enter Charger Configuration" errorMessage="Invalid Entry" [(model)]="vehicle.engineTransmission.charger.configuration"></app-input-field-text>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Max Power">
+      <div fxLayout="row">
+        <app-input-field-number label="Power(BHP)" placeholder="Enter BHP" [(model)]="vehicle.engineTransmission.maxPower.bhp"></app-input-field-number>
+        <app-input-field-number label="RPM" placeholder="Enter RPM" [(model)]="vehicle.engineTransmission.maxPower.rpm"></app-input-field-number>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Max Torque">
+      <div fxLayout="row">
+        <app-input-field-number label="Torque(NM)" placeholder="Enter NM" [(model)]="vehicle.engineTransmission.maxTorque.torque"></app-input-field-number>
+        <app-input-field-number label="RPM" placeholder="Enter RPM" [(model)]="vehicle.engineTransmission.maxTorque.rpm"></app-input-field-number>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Cylinder">
+      <div fxLayout="row">
+        <app-input-field-number label="Number of Cylinders" placeholder="Enter Number of Cylinders" errorMessage="Invalid Entry"
+          [(model)]="vehicle.engineTransmission.cylinder.numberOfCylinders"></app-input-field-number>
+        <app-input-field-text label="Cylinder Configuration" placeholder="Enter Cylinder Configuration" errorMessage="Invalid Entry"
+          [(model)]="vehicle.engineTransmission.cylinderConfiguration"></app-input-field-text>
+      </div>
+    </p-accordionTab>
+     <p-accordionTab header="Water capacity">
+      <div fxLayout="row">
+        <app-input-field-number label="Fresh water capacity" placeholder="Enter fresh water capacity" [(model)]="vehicle.caravanInteriors.waterCapacity.freshWaterCapacity"></app-input-field-number>
+        <app-input-field-number label="Waste water tank capacity" placeholder="Enter waste water tank capacity " [(model)]="vehicle.caravanInteriors.waterCapacity.wasteWaterTankCapacity"></app-input-field-number>
+      </div>
+    </p-accordionTab>
+     <p-accordionTab header="Engine">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <app-input-field-text label="Description" placeholder="Enter Description" [(model)]="vehicle.engineTransmission.description"></app-input-field-text>
+          <app-input-field-number label="Top Speed(Kmph)" placeholder="Enter Top Speed" [(model)]="vehicle.engineTransmission.topSpeed"></app-input-field-number>
+          <app-input-field-number label="Acceleration (0-100)" placeholder="Enter Acceleration" errorMessage="Invalid Entry" [(model)]="vehicle.engineTransmission.acceleration_0_to_100"></app-input-field-number>
+          <app-input-field-number label="Displacement(mm)" placeholder="Enter Displacement in mm" errorMessage="Invalid Entry" [(model)]="vehicle.engineTransmission.displacement"></app-input-field-number>
+
+        </div>
+        <div fxLayout="row">
+          <app-input-field-text label="Engine Type" placeholder="Enter Type of Engine" [(model)]="vehicle.engineTransmission.engineType"></app-input-field-text>
+          <app-input-field-number label="Mileage(Kmpl)" placeholder="Enter Mileage" [(model)]="vehicle.engineTransmission.mileageARAI"></app-input-field-number>
+          <app-input-field-number label="Valve" placeholder="Enter valve" [(model)]="vehicle.engineTransmission.valve"></app-input-field-number>
+          <app-input-field-number label="Number of  gradeability" placeholder="Enter Number of Gradeability" [(model)]="vehicle.engineTransmission.gradeabilityInPercent"></app-input-field-number>
+
+        </div>
+        <div fxLayout="row">
+          <app-input-field-number label="Bore (mm)" placeholder="Enter Bore in mm" [(model)]="vehicle.engineTransmission.bore"></app-input-field-number>
+          <app-input-field-number label="Stroke (mm)" placeholder="Enter Stroke in mm" [(model)]="vehicle.engineTransmission.stroke"></app-input-field-number>
+          <!--dropdown-->
+          <app-input-field-options label="Drivetrain" [list]="driveTrain" placeH="Choose Drivetrain" (selected)="vehicle.engineTransmission.driveTrain = $event"></app-input-field-options>
+          <app-input-field-text label="Clutch Type" placeholder="Enter Clutch Type" [(model)]="vehicle.engineTransmission.clutchType"></app-input-field-text>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-boolean label="Dual Clutch" [value]="vehicle.engineTransmission.dualClutch" (selected)="vehicle.engineTransmission.dualClutch = $event"></app-input-field-boolean>
+          <app-input-field-boolean label="Sports Mode" [value]="vehicle.engineTransmission.sportsMode" (selected)="vehicle.engineTransmission.sportsMode= $event"></app-input-field-boolean>
+          <app-input-field-boolean label="Alternate Fuel" [value]="vehicle.engineTransmission.alternateFuel" (selected)="vehicle.engineTransmission.alternateFuel= $event"></app-input-field-boolean>
+          <app-input-field-options label="Fuel Type" placeholder="Enter Fuel Type" [list]="engineType" (selected)="vehicle.engineTransmission.fuelType = $event"></app-input-field-options>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-text label="Fuel System"  placeholder="Enter Fuel System" [(model)]="vehicle.engineTransmission.fuelSystem"></app-input-field-text>
+          <app-input-field-number label="Number of Gears" placeholder="Enter Number of Gears" [(model)]="vehicle.engineTransmission.numberOfGears"></app-input-field-number>
+          <!--dropdown-->
+          <app-input-field-options label="Transmission Type" [list]="transmissionType" placeH="Choose Transmission Type" (selected)="vehicle.engineTransmission.transmissionType = $event"></app-input-field-options>
+          <app-input-field-boolean label="Manual Shifting for Automatic" [value] = "vehicle.engineTransmission.manualShiftingForAutomatic" (selected)="vehicle.engineTransmission.manualShiftingForAutomatic= $event"></app-input-field-boolean>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-multiple label="Driving Modes" placeholder="Enter Driving Modes" [(model)]="vehicle.engineTransmission.drivingModes"></app-input-field-multiple>
+          <app-input-field-boolean label="Engine Start Stop Function" [value] = "vehicle.engineTransmission.engineStartStopFunction" (selected)="vehicle.engineTransmission.engineStartStopFunction= $event"></app-input-field-boolean>
+          <app-input-field-text label=" Emission Norms" placeholder="Enter Emission Norms" [(model)]="vehicle.engineTransmission.emissionNorms"></app-input-field-text>
+
+          <app-input-field-boolean label="Cruise Control" [value] = "vehicle.engineTransmission.cruiseControl" (selected)="vehicle.engineTransmission.cruiseControl= $event"></app-input-field-boolean>
+
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Suspension">
+      <div fxLayout="row">
+        <app-input-field-text label="Front Suspension" placeholder="Enter Front Suspension" [(model)]="vehicle.wheel.suspension.frontSuspension"></app-input-field-text>
+        <app-input-field-text label="Rear Suspension" placeholder="Enter Rear Suspension" [(model)]="vehicle.wheel.suspension.rearSuspension"></app-input-field-text>
+      </div>
+    </p-accordionTab>
+    
+    <p-accordionTab header="Brakes">
+      <div fxLayout="row">
+        <app-input-field-text label="Front Brake Type" placeholder="Enter Front Brake Type" [(model)]="vehicle.wheel.brakes.frontBrakeType"></app-input-field-text>
+        <app-input-field-text label="Rear Brake Type" placeholder="Enter Rrear Brake Type" [(model)]="vehicle.wheel.brakes.rearBrakeType"></app-input-field-text>
+        <app-input-field-text label="Parking Brake Type" placeholder="Enter Parking Brake Type" [(model)]="vehicle.wheel.brakes.parkingBrakeType"></app-input-field-text>
+        <app-input-field-boolean label="Hill Holder"  [value] = "vehicle.wheel.brakes.hillHolder" placeholder="Enter Hill holder" (selected)="vehicle.wheel.brakes.hillHolder=$event"></app-input-field-boolean>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Steering">
+      <div fxLayout="row">
+        <app-input-field-text label="Steering Type" placeholder="Enter Steering Type" [(model)]="vehicle.wheel.steering.steeringType"></app-input-field-text>
+        <app-input-field-number label="Minimum Turning Radius" placeholder="Enter Minimum Turning Radius" errorMessage="Invalid Entry"
+          [(model)]="vehicle.wheel.steering.minTurningRadius"></app-input-field-number>
+      </div>
+    </p-accordionTab>
+     <p-accordionTab header="Energy System">
+      <div fxLayout="row">
+        <app-input-field-number label="Battery Capacity" placeholder="Enter Battery capacity" [(model)]="vehicle.caravanInteriors.energySystem.batteryCapacity"></app-input-field-number>
+        <app-input-field-boolean label="Solar Panel" [value] = "vehicle.caravanInteriors.energySystem.solarPanel" (selected)="vehicle.caravanInteriors.energySystem.solarPanel=$event"></app-input-field-boolean>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Front Bed">
+      <div fxLayout="row">
+        <app-input-field-number label="Length" placeholder="Enter Length" [(model)]="vehicle.caravanInteriors.seatingArrangement.frontBed.length"></app-input-field-number>
+        <app-input-field-number label="Height" placeholder="Enter Height" [(model)]="vehicle.caravanInteriors.seatingArrangement.frontBed.height"></app-input-field-number>
+        <app-input-field-number label="Width" placeholder="Enter Width" [(model)]="vehicle.caravanInteriors.seatingArrangement.frontBed.width"></app-input-field-number>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Rear Bed">
+      <div fxLayout="row">
+        <app-input-field-number label="Length" placeholder="Enter Length" [(model)]="vehicle.caravanInteriors.seatingArrangement.rearBed.length"></app-input-field-number>
+        <app-input-field-number label="Height" placeholder="Enter Height" [(model)]="vehicle.caravanInteriors.seatingArrangement.rearBed.height"></app-input-field-number>
+        <app-input-field-number label="Width" placeholder="Enter Width" [(model)]="vehicle.caravanInteriors.seatingArrangement.rearBed.width"></app-input-field-number>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Kitchen">
+      <div fxLayout="row">
+        <app-input-field-boolean label="Refrigerator" [value]= "vehicle.caravanInteriors.kitchen.refrigerator" (selected)="vehicle.caravanInteriors.kitchen.refrigerator=$event"></app-input-field-boolean>
+        <app-input-field-boolean label="Microwave" [value]= "vehicle.caravanInteriors.kitchen.microwave" (selected)="vehicle.caravanInteriors.kitchen.microwave=$event"></app-input-field-boolean>
+        <app-input-field-boolean label="Extractor Hood" [value]= "vehicle.caravanInteriors.kitchen.extractorHood" (selected)="vehicle.caravanInteriors.kitchen.extractorHood=$event"></app-input-field-boolean>
+      </div>
+    </p-accordionTab>
+
+    <p-accordionTab header="Axle">
+      <div fxLayout="row">
+        <app-input-field-text label="Axle Configuration" placeholder="Enter Axle Configuration" [(model)]="vehicle.axle.axleConfiguration"></app-input-field-text>
+        <app-input-field-text label="Front Axle Type" placeholder="Enter Front Axle Type" [(model)]="vehicle.axle.frontAxleType"></app-input-field-text>
+        <app-input-field-text label="Rear Axle Type" placeholder="Enter Rear Axle Type" [(model)]="vehicle.axle.rearAxleType"></app-input-field-text>
+
+      </div>
+    </p-accordionTab>
+
+    <p-accordionTab header="cabin">
+      <div fxLayout="row">
+        <app-input-field-text label="Cabin Type" placeholder="Enter Cabin Type" [(model)]="vehicle.cabin.cabinType"></app-input-field-text>
+        <app-input-field-boolean label="Tiltable Cabin" [value] = "vehicle.cabin.tiltableCabin" (selected)="vehicle.cabin.tiltableCabin=$event"></app-input-field-boolean>
+        <app-input-field-boolean label="Trailer Coupling" [value] = "vehicle.cabin.trailerCoupling" (selected)="vehicle.cabin.trailerCoupling = $event"></app-input-field-boolean>
+        <app-input-field-boolean label="Cabinet Lighting" [value]= "vehicle.cabin.cabinetLighting" (selected)="vehicle.cabin.cabinetLighting = $event"></app-input-field-boolean>
+      </div>
+    </p-accordionTab>
+
+
+    <p-accordionTab header="Caravan Interiors">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <app-input-field-number label="Number Of Bicycle Holders" placeholder="Enter Number Of Bicycle Holders" [(model)]="vehicle.caravanInteriors.numberOfBicycleHolders"></app-input-field-number>
+          <app-input-field-number label="Wall Thickness" placeholder="Enter Wall Thickness" [(model)]="vehicle.caravanInteriors.wallThickness"></app-input-field-number>
+          <app-input-field-number label="Roof Thickness " placeholder="Enter Roof Thickness" [(model)]="vehicle.caravanInteriors.roofThickness"></app-input-field-number>
+          <app-input-field-number label="Floor Thickness " placeholder="Enter Floor Thickness" [(model)]="vehicle.caravanInteriors.floorThickness"></app-input-field-number>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-text label="FloorType" placeholder="Enter Floor Type" [(model)]="vehicle.caravanInteriors.floorType"></app-input-field-text>
+          <app-input-field-text label="Heating System Type" placeholder="Enter Heating System Type" [(model)]="vehicle.caravanInteriors.heatingSystemType"></app-input-field-text>
+          <app-input-field-multiple label="Amenities" placeholder="Enter Amenities" [(model)]="vehicle.caravanInteriors.amenities"></app-input-field-multiple>
+          <app-input-field-boolean label="Toilet Ventilation" [value] = "vehicle.caravanInteriors.toiletVentilation" (selected)="vehicle.caravanInteriors.toiletVentilation= $event"></app-input-field-boolean>
+        </div>
+      </div>
+    </p-accordionTab>
+
+    <p-accordionTab header="Seating arrangment">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <app-input-field-number label="Occupant Limit" placeholder="Enter Number Of Occupant Limit" [(model)]="vehicle.caravanInteriors.seatingArrangement.occupantLimit"></app-input-field-number>
+          <app-input-field-number label="Additional Seats" placeholder="Enter additional Seats" [(model)]="vehicle.caravanInteriors.seatingArrangement.additionalSeats"></app-input-field-number>
+          <app-input-field-number label=" number Of FrontBeds" placeholder="Enter Number Of FrontBeds" [(model)]="vehicle.caravanInteriors.seatingArrangement.numberOfFrontBeds"></app-input-field-number>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-number label=" Number Of RearBeds" placeholder="Enter numberOfRearBeds" [(model)]="vehicle.caravanInteriors.seatingArrangement.numberOfRearBeds"></app-input-field-number>
+          <app-input-field-number label=" number Of Additional Beds" placeholder="Enter Number Of Additional Beds" [(model)]="vehicle.caravanInteriors.seatingArrangement.numberOfAdditionalBeds"></app-input-field-number>
+          <app-input-field-multiple label="upholsteryFabrics" placeholder="Enter Upholstery Fabrics" [(model)]="vehicle.caravanInteriors.seatingArrangement.upholsteryFabrics"></app-input-field-multiple>
+        </div>
+      </div>
+    </p-accordionTab>
+
+     <p-accordionTab header="Infotainment ">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <app-input-field-number label="Number Of Speakers" placeholder="Enter Number Of Speakers " [(model)]="vehicle.caravanInteriors.infotinment.numberOfSpeakers"></app-input-field-number>
+          <app-input-field-text label="Music System" placeholder="Enter Music System" [(model)]="vehicle.caravanInteriors.infotinment.musicSystem"></app-input-field-text>
+          <app-input-field-boolean label="AUX Compatibility" [value]="vehicle.caravanInteriors.infotinment.auxCompatibility" (selected)="vehicle.caravanInteriors.infotinment.auxCompatibility= $event"></app-input-field-boolean>
+          <app-input-field-boolean label="MP3 Playback" [value]="vehicle.caravanInteriors.infotinment.mp3Playback" (selected)="vehicle.caravanInteriors.infotinment.mp3Playback= $event"></app-input-field-boolean>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-boolean label="USB Compatibility" [value]="vehicle.caravanInteriors.infotinment.usbCompatibility" (selected)="vehicle.caravanInteriors.infotinment.usbCompatibility= $event"></app-input-field-boolean>
+          <app-input-field-boolean label="Radio" [value]="vehicle.caravanInteriors.infotinment.radio" (selected)="vehicle.caravanInteriors.infotinment.radio= $event"></app-input-field-boolean>
+          <app-input-field-boolean label="DVD Playback" [value]="vehicle.caravanInteriors.infotinment.dvdPlayback" (selected)="vehicle.caravanInteriors.infotinment.dvdPlayback= $event"></app-input-field-boolean>
+          <app-input-field-boolean label="CD Player" [value]="vehicle.caravanInteriors.infotinment.cdPlayer" (selected)="vehicle.caravanInteriors.infotinment.cdPlayer= $event"></app-input-field-boolean>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-boolean label="iPod Compatibility" [value]="vehicle.caravanInteriors.infotinment.ipodCompatibility" (selected)="vehicle.caravanInteriors.infotinment.ipodCompatibility= $event"></app-input-field-boolean>
+          <app-input-field-boolean label="TV Compartment" [value]="vehicle.caravanInteriors.infotinment.tvCompartment" (selected)="vehicle.caravanInteriors.infotinment.tvCompartment= $event"></app-input-field-boolean>
+          <app-input-field-boolean label="Alarm System" [value]="vehicle.caravanInteriors.infotinment.alarmSystem" (selected)="vehicle.caravanInteriors.infotinment.alarmSystem= $event"></app-input-field-boolean>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Bus Features">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <app-input-field-boolean label="First Aid Kit" [value]= "vehicle.busFeatures.firstAidKit" (selected)="vehicle.busFeatures.firstAidKit= $event"></app-input-field-boolean>
+          <app-input-field-boolean label="Hat Rack"  [value]= "vehicle.busFeatures.hatrack" (selected)="vehicle.busFeatures.hatrack= $event"></app-input-field-boolean>
+          <app-input-field-number label="Passenger Doors"  placeholder="Enter Width" [(model)]="vehicle.busFeatures.passengerDoors"></app-input-field-number>
+          <app-input-field-boolean label="Luggage Bootspace Availibility"  [value]= "vehicle.busFeatures.luggageBootSpaceAvailibility" (selected)="vehicle.busFeatures.luggageBootSpaceAvailibility= $event"></app-input-field-boolean>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-number label="Luggage Bootspace Capacity" placeholder="Enter Width" [(model)]="vehicle.busFeatures.luggageBootSpaceCapacity"></app-input-field-number>
+          <app-input-field-boolean label="Emergency Exit"  [value]= "vehicle.busFeatures.emergencyExit" (selected)="vehicle.busFeatures.emergencyExit= $event"></app-input-field-boolean>
+          <app-input-field-boolean label="Side window"  [value]= "vehicle.busFeatures.sideWindows" (selected)="vehicle.busFeatures.sideWindows= $event"></app-input-field-boolean>
+        </div>
+      </div>
+    </p-accordionTab>
+
+
+
+    <p-accordionTab header="Wheel">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <app-input-field-text label="Wheel Type" placeholder="Enter Wheel Type" [(model)]="vehicle.wheel.wheelType"></app-input-field-text>
+        </div>
+        <span class="input-group header">Front Tyres</span>
+        <div fxLayout="row">
+          <app-input-field-number label="Width(mm)" placeholder="Enter Width" [(model)]="vehicle.wheel.frontTyres.width"></app-input-field-number>
+          <app-input-field-number label="Aspect Ratio" placeholder="Enter Aspect Ratio" [(model)]="vehicle.wheel.frontTyres.aspectRatio"></app-input-field-number>
+          <app-input-field-number label="Diameter(rim)" placeholder="Enter Diameter" [(model)]="vehicle.wheel.frontTyres.diameter"></app-input-field-number>
+          <!--boolean-->
+          <app-input-field-boolean [value]="vehicle.wheel.frontTyres.radial" label="Radial" placeholder="Enter Radial" (selected)="vehicle.wheel.frontTyres.radial= $event"></app-input-field-boolean>
+        </div>
+        <span class="header">Rear Tyres</span>
+        <div fxLayout="row">
+          <app-input-field-number label="Width(mm)" placeholder="Enter Width" [(model)]="vehicle.wheel.rearTypes.width"></app-input-field-number>
+          <app-input-field-number label="Aspect Ratio" placeholder="Enter Aspect Ratio" [(model)]="vehicle.wheel.rearTypes.aspectRatio"></app-input-field-number>
+          <app-input-field-number label="Diameter(rim)" placeholder="Enter Diameter" [(model)]="vehicle.wheel.rearTypes.diameter"></app-input-field-number>
+          <!--boolean-->
+          <app-input-field-boolean [value]="vehicle.wheel.rearTypes.radial" label="Radial" (selected)="vehicle.wheel.rearTypes.radial=$event"></app-input-field-boolean>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Safety">
+      <div fxLayout="row">
+        <app-input-field-number label="Airbags" placeholder="Enter number of Airbags" [(model)]="vehicle.safety.airbags"></app-input-field-number>
+        <!--boolean-->
+        <app-input-field-boolean [value]="vehicle.safety.seatBeltWarning" label="Seat Belt Warnings" (selected)="vehicle.safety.seatBeltWarning=$event"></app-input-field-boolean>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Lock Security">
+      <div fxLayout="row">
+        <app-input-field-boolean [value]="vehicle.lockSecurity.engineImmobilizer" label="Engine Immobilizer
+           " (selected)="vehicle.lockSecurity.engineImmobilizer=$event"></app-input-field-boolean>
+        <app-input-field-boolean [value]="vehicle.lockSecurity.centralLocking" label="Central Locking" (selected)="vehicle.lockSecurity.centralLocking=$event"></app-input-field-boolean>
+        <app-input-field-boolean [value]="vehicle.lockSecurity.speedSensingDoorLock" label="Speed Sensing Door Lock
+           " (selected)="vehicle.lockSecurity.speedSensingDoorLock=$event"></app-input-field-boolean>
+        <app-input-field-boolean [value]="vehicle.lockSecurity.childSafetyLock" label="Child Safety Lock
+           " (selected)="vehicle.lockSecurity.childSafetyLock=$event"></app-input-field-boolean>
+        <!--boolean-->
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Comfort and Convenience">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <app-input-field-boolean [value]="vehicle.comfortConvenience.airConditioner" label="Air Conditioner
+           " (selected)="vehicle.comfortConvenience.airConditioner=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.comfortConvenience.powerOutlets12V" label="Power Outlets
+           " (selected)="vehicle.comfortConvenience.powerOutlets12V=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.comfortConvenience.steeringAdjustment" label="Steering Adjustment
+           " (selected)="vehicle.comfortConvenience.steeringAdjustment=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.comfortConvenience.headLightOffReminder" label="Headlight Off Reminder
+           " (selected)="vehicle.comfortConvenience.headLightOffReminder=$event"></app-input-field-boolean>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-boolean [value]="vehicle.comfortConvenience.ignitionKeyOffReminder" label="Ignition Key Off
+            Reminder" (selected)="vehicle.comfortConvenience.ignitionKeyOffReminder=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.comfortConvenience.antiGlareMirrors" label="Anti-Glare Mirrors
+           " (selected)="vehicle.comfortConvenience.antiGlareMirrors=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.comfortConvenience.vanityMirrorsOnSunVisor" label="Vanity Mirrors
+            on Sunvisor" (selected)="vehicle.comfortConvenience.vanityMirrorsOnSunVisor=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.comfortConvenience.heater" label="Heater" (selected)="vehicle.comfortConvenience.heater=$event"></app-input-field-boolean>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Seat Upholstery">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <app-input-field-text label="Seat Upholstery" placeholder="Enter Seat Upholstery" [(model)]="vehicle.seatUpholstery.seatUpholstery"></app-input-field-text>
+          <!--boolean-->
+          <app-input-field-boolean [value]="vehicle.seatUpholstery.driverSeatAdjustment" label="Driver Seat Adjustment
+           " (selected)="vehicle.seatUpholstery.driverSeatAdjustment=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.seatUpholstery.headRest" label="Head Rest" (selected)="vehicle.seatUpholstery.headRest=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.seatUpholstery.frontPassangerSeatAdjustment" label="Front Passenger
+            Seat Adjustment" (selected)="vehicle.seatUpholstery.frontPassangerSeatAdjustment=$event"></app-input-field-boolean>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-text label="Rear Passenger Seats" placeholder="Enter Rear Passenger Seats" errorMessage="Invalid
+            Entry" [(model)]="vehicle.seatUpholstery.rearPassengerSeats"></app-input-field-text>
+          <!--boolean-->
+          <app-input-field-text label="Interiors" placeholder="Enter Interior" [(model)]="vehicle.seatUpholstery.interiors"></app-input-field-text>
+          <app-input-field-text label="Interior Colors" placeholder="Enter Interior Colors" [(model)]="vehicle.seatUpholstery.interiorColors"></app-input-field-text>
+          <app-input-field-boolean [value]="vehicle.seatUpholstery.foldingRearSeat" label="Folding Rear Seat
+           " (selected)="vehicle.seatUpholstery.foldingRearSeat=$event"></app-input-field-boolean>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-boolean [value]="vehicle.seatUpholstery.adjustableHeadRest" label="Adjustable Head Rest
+           " (selected)="vehicle.seatUpholstery.adjustableHeadRest=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.seatUpholstery.cupHolders" label="Cup Holders" (selected)="vehicle.seatUpholstery.cupHolders=$event"></app-input-field-boolean>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Doors, Windows & Mirrors">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <app-input-field-boolean [value]="vehicle.doorsWindowsMirrors.powerWindows" label="Power Windows
+           " (selected)="vehicle.doorsWindowsMirrors.powerWindows=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.doorsWindowsMirrors.outsideRearViewMirrors" label="Outside Rearview
+            Mirrors" (selected)="vehicle.doorsWindowsMirrors.outsideRearViewMirrors=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.doorsWindowsMirrors.adjustableORVM" label="Adjustable Outside Rearview
+            Mirrors" (selected)="vehicle.doorsWindowsMirrors.adjustableORVM=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.doorsWindowsMirrors.exteriorDoorHandles" label="Exterior Door Handles
+           " (selected)="vehicle.doorsWindowsMirrors.exteriorDoorHandles=$event"></app-input-field-boolean>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-boolean [value]="vehicle.doorsWindowsMirrors.interiorDoorHandles" label="Interior Door Handles
+           " (selected)="vehicle.doorsWindowsMirrors.interiorDoorHandles=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.doorsWindowsMirrors.doorPockets" label="Door Pockets
+           " (selected)="vehicle.doorsWindowsMirrors.doorPockets=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.doorsWindowsMirrors.bootLidOpener" label="Boot Lid Opener
+           " (selected)="vehicle.doorsWindowsMirrors.bootLidOpener=$event"></app-input-field-boolean>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Exterior">
+      <div fxLayout="row">
+        <app-input-field-boolean [value]="vehicle.exterior.roofMountedAntenna" label="Roof Mounted Antenna
+           " (selected)="vehicle.exterior.roofMountedAntenna=$event"></app-input-field-boolean>
+        <app-input-field-boolean [value]="vehicle.exterior.bodyColoredBumpers" label="Body Colored Bumpers
+           " (selected)="vehicle.exterior.bodyColoredBumpers=$event"></app-input-field-boolean>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Lighting">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <app-input-field-text label="Headlamps" placeholder="Enter Headlamps" [(model)]="vehicle.lighting.headLamps"></app-input-field-text>
+          <!--boolean-->
+          <app-input-field-boolean [value]="vehicle.lighting.automaticHeadlamp" label="Automatic Head Lamp
+           " (selected)="vehicle.lighting.automaticHeadlamp=$event"></app-input-field-boolean>
+          <app-input-field-text label="Tail Lamps" placeholder="Enter TailLamps" [(model)]="vehicle.lighting.tailLamps"></app-input-field-text>
+          <app-input-field-text label="Cabin Lamps" placeholder="Enter Cabin Lamps" [(model)]="vehicle.lighting.cabinLamps"></app-input-field-text>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-boolean [value]="vehicle.lighting.headLightHeightAdjuster" label="Headlights Adjuster
+           " (selected)="vehicle.lighting.headLightHeightAdjuster=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.lighting.gloveBoxLamp" label="Glovebox Lamps" (selected)="vehicle.lighting.gloveBoxLamp=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.lighting.lightsOnVanityMirrors" label="Lights on Vanity Mirrors
+           " (selected)="vehicle.lighting.lightsOnVanityMirrors=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.lighting.dayLightRunninglight" label="Day Light Running Lights
+           " (selected)="vehicle.lighting.dayLightRunninglight=$event"></app-input-field-boolean>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-boolean [value]="vehicle.lighting.fogLamps" label="Fog Lamps" (selected)="vehicle.lighting.fogLamps=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.lighting.rearReadingLamp" label="Rear Reading Lamp" (selected)="vehicle.lighting.rearReadingLamp=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.lighting.followMeHomeHeadLamps" label="Follow Me Home Headlamps
+           " (selected)="vehicle.lighting.followMeHomeHeadLamps=$event"></app-input-field-boolean>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Instrumentation">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <app-input-field-options label="Instrument Cluster" placeholder="Enter Instrument Cluster" [list]="instrumentType
+           " placeholder="Choose Clock Type" [value]="vehicle.instrumentation.instrumentCluster" (selected)="vehicle.instrumentation.instrumentCluster=$event"></app-input-field-options>
+          <app-input-field-options label="Clock" [list]="instrumentType" placeholder="Choose Clock Type" [value]="vehicle.instrumentation.clock"
+            (selected)="vehicle.instrumentation.clock=$event"></app-input-field-options>
+          <app-input-field-boolean [value]="vehicle.instrumentation.tripMeter" label="Trip Meter" (selected)="vehicle.instrumentation.tripMeter=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.instrumentation.averageFuelConsumption" label="Average Fuel Consumption
+            Meter" (selected)="vehicle.instrumentation.averageFuelConsumption=$event"></app-input-field-boolean>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-boolean [value]="vehicle.instrumentation.lowFuelLevelWarning" label="Low Fuel Level Warning
+           " (selected)="vehicle.instrumentation.lowFuelLevelWarning=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.instrumentation.doorAjarWarning" label="Door Ajar Warning
+           " (selected)="vehicle.instrumentation.doorAjarWarning=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.instrumentation.gearIndicator" label="Gear Indicator
+           " (selected)="vehicle.instrumentation.gearIndicator=$event"></app-input-field-boolean>
+          <app-input-field-boolean [value]="vehicle.instrumentation.shiftIndicator" label="Shift Indicator
+           " (selected)="vehicle.instrumentation.shiftIndicator=$event"></app-input-field-boolean>
+        </div>
+        <div fxLayout="row">
+          <app-input-field-boolean [value]="vehicle.instrumentation.headsUpDisplay" label="Heads Up Display
+           " (selected)="vehicle.instrumentation.headsUpDisplay=$event"></app-input-field-boolean>
+          <app-input-field-options label="Tachometer" placeholder="Enter Tachometer" [list]="instrumentType
+           " placeholder="Choose Clock Type" [value]="vehicle.instrumentation.tachometer" (selected)="vehicle.instrumentation.tachometer=$event"></app-input-field-options>
+          <app-input-field-boolean [value]="vehicle.instrumentation.instantaneousConsumption" label="Instantaneous Consumption
+           " (selected)="vehicle.instrumentation.instantaneousConsumption=$event"></app-input-field-boolean>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Service">
+      <div fxLayout="column">
+        <p-dialog header="Enter Service Details" modal=true [(visible)]="displayDialog" [width]="600">
+          <app-new-service-dialog [parts]='vehicle.parts' [service]='serviceEdit' (serviceChange)="setService($event)"></app-new-service-dialog>
+        </p-dialog>
+        <div fxLayout='row'>
+        <app-button style="margin:12px" (click)="displayDialog = true" title="Add Service"></app-button>
+        <span fxFlex></span>
+          <app-button style="margin:12px" (click)="displaySearchDialog = true;searchFor = 'Service'" title="Clone from another Variant"></app-button>
+        </div>
+        <p-dataTable class="input-group" [value]="vehicle.serviceDetailList" selectionMode="single" (onRowSelect)="editService($event)">
+          <p-column field="serviceNumber" header="Service Number"></p-column>
+          <p-column field="distanceFrom" header="Distance From (Kms)"></p-column>
+    <p-column field="distanceTo" header="Distance To (Kms)"></p-column>
+
+          <p-column field="serviceType" header="Service Type"></p-column>
+          <p-column field="jobs" header="Jobs">
+            <ng-template let-col let-log="rowData" pTemplate="body">
+              <span *ngFor="let job of log[col.field];let isLast=last">{{job}}{{isLast ? '' : ', '}}</span>
+            </ng-template>
+          </p-column>
+          <p-column field="parts" header="Parts">
+            <ng-template let-col let-log="rowData" pTemplate="body">
+              <span *ngFor="let part of log[col.field];let isLast=last">{{part.partName}}{{isLast ? '' : ', '}}</span>
+            </ng-template>
+          </p-column>
+          <p-column field="price" header="Estimated Cost"></p-column>
+          <p-column [style]="{'width':'38px'}">
+            <ng-template let-col let-log="rowData" let-i="rowIndex" pTemplate="body">
+              <span style="cursor:pointer" fxLayout="row" fxLayoutAlign="start center" (click)="deleteService(i)">
+            <i class="material-icons">delete</i>
+            </span>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Parts">
+      <div fxLayout="column">
+        <p-dialog header="Enter Parts Details" modal=true [(visible)]="displayPartDialog" [width]="600">
+          <app-new-part-dialog (partsChange)="setParts($event)"></app-new-part-dialog>
+        </p-dialog>
+        <div fxLayout='row'>
+          <app-button style="margin:12px" (click)="displayPartDialog = true" title="Add Part"></app-button>
+          <span fxFlex></span>
+          <app-button style="margin:12px" (click)="displaySearchDialog = true;searchFor = 'Parts'" title="Clone from Another Variant"></app-button>
+        </div>
+        <p-dataTable class="input-group" [value]="vehicle.parts" selectionMode="single" (onRowSelect)="editPart($event)">
+          <p-column field="partName" header="Part Name"></p-column>
+          <p-column field="quantity" header="Quantity"></p-column>
+          <p-column field="partPrice.price" header="Price"></p-column>
+          <p-column field="partPrice.labourcharges" header="Labour Cost"></p-column>
+          <p-column [style]="{'width':'38px'}">
+            <ng-template let-col let-log="rowData" let-i="rowIndex" pTemplate="body">
+              <span style="cursor:pointer" fxLayout="row" fxLayoutAlign="start center" (click)="deletePart(i)">
+            <i class="material-icons">delete</i>
+            </span>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Manufacturer Warranty">
+      <div fxLayout="row">
+        <app-input-field-number label="Years of Warranty" placeholder="Enter Years of Warranty" errorMessage="Invalid
+            Entry" [(model)]="vehicle.manufacturerWarranty.yearsOfWarranty"></app-input-field-number>
+        <app-input-field-number label="Kms of Warranty" placeholder="Enter Kms of Warranty" [(model)]="vehicle.manufacturerWarranty.kmsOfWarranty"></app-input-field-number>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+  <p-dialog header='Search Vehicle'  modal=true [(visible)]='displaySearchDialog' [width]='600'>
+    <app-vehicle-search-dialog  [searchFor]='searchFor' (searchResults)='cloneFromVehicle($event)'></app-vehicle-search-dialog>
+  </p-dialog>
+  <!--End of form-->
+  <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="2%" style="margin:12px;margin-top:12px">
+    <app-button title="Cancel" (click)="cancelEdit()"></app-button>
+    <app-button title="Create Vehicle" [disabled]="!goForIgnition()" (click)="createVehicle()"></app-button>
+  </div>
+</app-card>
+<app-circular-progress [showDialog]="showDialog" message="Please Wait"></app-circular-progress>
+<toaster-container></toaster-container>

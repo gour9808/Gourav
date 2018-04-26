@@ -1,0 +1,27 @@
+<!--<app-card title="Working Hours" expanded="true">-->
+<p-dataTable [value]="hours">
+    <p-column field="dayOfWeek" header="Day Of Week">
+        <ng-template let-col let-hour="rowData" pTemplate="body">
+            <span>{{hour.dayOfWeek}}</span>
+        </ng-template>
+    </p-column>
+    <p-column field="openingTime.startTime" header="Opening Time">
+        <ng-template let-time="rowData" let-ri="rowIndex" let-col pTemplate="body">
+            <p-calendar [(ngModel)]="time.openingTime.startTime" [timeOnly]="true" [disabled]="checkArray[ri]" hourFormat="12" (onSelect)="setStartTime(ri,$event)"></p-calendar>
+        </ng-template>
+    </p-column>
+    <p-column field="openingTime.endTime" header="Closing Time">
+        <ng-template let-time="rowData" let-ri="rowIndex" let-col pTemplate="body">
+            <p-calendar [(ngModel)]="time.openingTime.endTime" [timeOnly]="true" [disabled]="checkArray[ri]" hourFormat="12" (onSelect)="setEndTime(ri,$event)"></p-calendar>
+        </ng-template>
+    </p-column>
+    <p-column field="status" header="Close">
+        <ng-template let-row="rowData" let-ri="rowIndex" pTemplate="body">
+            <p-checkbox #checkBox binary='true' [(ngModel)]='checkArray[ri]' (onChange)="toggle(ri,$event)"></p-checkbox>
+        </ng-template>
+    </p-column>
+</p-dataTable>
+<div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="2%" style="margin:12px;margin-top:12px">
+    <app-button title="Save" style="margin-top:30px" (click)="updateDealerWorkingHour()"></app-button>
+</div>
+<!--</app-card>-->

@@ -1,0 +1,38 @@
+<app-card title="Vechicle List" expanded=true>
+<p-dataTable [value]="vehicles" scrollable="true" scrollHeight="scrollH" [rows]="15" [paginator]="true" [pageLinks]="3" [loading]="loadingVehicles" selectionMode="single"
+      (onRowSelect)="vehicleSelected($event)">
+      <p-column field="make" header="Make" [sortable]="true"></p-column>
+      <p-column field="model" header="Model" [sortable]="true"></p-column>
+      <p-column field="variant" header="Variant"></p-column>
+      <p-column field="countryCode" header="Country">
+         <ng-template let-col let-log="rowData" pTemplate="body">
+          <div>{{getCountry(log[col.field])}}</div>
+        </ng-template>
+      </p-column>
+      <p-column field="price.exShowroomPrice" header="Price"></p-column>
+      <p-column field="updateTime" header="Updated Time">
+        <ng-template let-col let-log="rowData" pTemplate="body">
+          <div>{{log[col.field] | date:'jms'}} {{log[col.field] | date:'yMMMd'}}</div>
+        </ng-template>
+      </p-column>
+       <p-column [style]="{'width':'38px'}">
+        <ng-template let-col let-log="rowData" pTemplate="body">
+          <span style="cursor:pointer" fxLayout="row" fxLayoutAlign="start center" (click)="vehicleDuplicate(log)">
+            <i class="material-icons">content_copy</i>
+            </span>
+        </ng-template>
+      </p-column>
+      <p-column [style]="{'width':'38px'}">
+        <ng-template let-col let-log="rowData" pTemplate="body">
+          <span style="cursor:pointer" fxLayout="row" fxLayoutAlign="start center" (click)="vehicleDeleted(log)">
+            <i class="material-icons">delete</i>
+            </span>
+        </ng-template>
+      </p-column>
+      <ng-template let-car pTemplate="rowexpansion">
+        <div fxLayout="row">
+          this is the expanded row with data
+        </div>
+      </ng-template>
+    </p-dataTable>
+</app-card>

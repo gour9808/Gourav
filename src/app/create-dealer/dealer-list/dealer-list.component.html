@@ -1,0 +1,63 @@
+<app-card title="Search Dealers" expanded=true>
+    <p-accordion [multiple]="true">
+        <p-accordionTab header="Search based on Dealer Make & Country">
+            <div fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div style="width:50%">
+                        <app-input-field-options label="Search by Make" placeH="Select Make" [list]="brands" (selected)="selectType($event)"></app-input-field-options>
+                    </div>
+                    <div style="width:50%">
+                        <app-input-field-options label="Country" [reset]="reset" [list]="countries" (selected)="search.countrycode = $event"></app-input-field-options>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="2%" style="margin:12px">
+                    <app-button (click)="resetSearch()" title="Reset"></app-button>
+                    <app-button [disabled]="!goForSearch()" (click)="dealerListbasedonMake()" title="Search"></app-button>
+                </div>
+            </div>
+        </p-accordionTab>
+        <p-accordionTab header="Search based on Dealer Email">
+            <app-input-field-text label="Email" placeholder="Enter Dealer Email to search" errorMessage="Invalid Email" [(model)]="email" [error]="valEmail()"></app-input-field-text>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="2%" style="margin:12px">
+                <app-button (click)="resetSearch()" title="Reset"></app-button>
+                <app-button [disabled]="!goForEmailSearch()" (click)="dealerListbasedonEmail()" title="Search"></app-button>
+            </div>
+        </p-accordionTab>
+        <p-accordionTab header="Search based on Dealer Name">
+            <app-input-field-text label="Dealer Name" placeholder="Enter Dealer Name to search" [errorMessage]="errorMessage" [(model)]="name" (modelChange)="nameChange($event)"></app-input-field-text>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="2%" style="margin:12px">
+                <app-button (click)="resetSearch()" title="Reset"></app-button>
+                <app-button [disabled]="!goForNameSearch()" (click)="dealerListbasedonName()" title="Search"></app-button>
+            </div>
+        </p-accordionTab>
+    </p-accordion>
+</app-card>
+<app-card title="Dealer List" expanded=true>
+    <p-dataTable [value]="dList" scrollable="true" scrollHeight="scrollH" [rows]="15" [paginator]="true" [pageLinks]="3" [loading]="loadingVehicles" selectionMode="single">
+        <p-column field="name" header="Dealer Name" [sortable]="true"></p-column>
+        <p-column field="phoneNumber" header="Phone Number">
+            <ng-template let-col let-log="rowData" pTemplate="body">
+                <div class="trim">{{log[col.field]}}</div>
+            </ng-template>
+        </p-column>
+        <p-column field="listOfBrands" header="Brand">
+            <ng-template let-col let-log="rowData" pTemplate="body">
+                <div class="trim">{{log[col.field]}}</div>
+            </ng-template>
+        </p-column>
+        <p-column header="Action">
+            <ng-template let-col let-log="rowData" pTemplate="body">
+                <i class="material-icons" (click)="dealerEdit(log)">mode_edit</i>
+            </ng-template>
+        </p-column>
+         <p-column header="Action">
+            <ng-template let-col let-log="rowData" pTemplate="body">
+                       <app-button (click)="cloneDealer(log)" title="Clone"></app-button>
+
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+</app-card>
+
+<app-circular-progress [showDialog]="showDialog" message="Please Wait"></app-circular-progress>
+<toaster-container></toaster-container>

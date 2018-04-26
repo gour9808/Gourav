@@ -1,32 +1,25 @@
 .card {
-    background: white;
-    margin: 10px;
-    min-width: 300px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.19);
+  margin: 10px;
+  min-width: 100px;
+  min-height: 100px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  &.small {
+    min-width: 200px;
     min-height: 100px;
-    cursor: pointer;
-    padding: 12px;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
-    &.small {
-        min-width: 300px;
-        min-height: 100px;
-    }
+  }
+}
 
-    .mdi.dash {
-        font-size: 64px;
-        color: white;
-        margin: 0;
-    }
-    
-    .dash-number {
-        font-size: 26px;
-        font-weight: 500;
-        color: white;
-    }
-    
-    .dash-title {
-        font-size: 20px;
-        color: white;
-            margin-top: 11px;
-    }
-   
+.material-icons.dash {
+  font-size: 64px;
+}
+
+.dash-number {
+  font-size: 2.6rem;
+  font-weight: 700;
+}
+
+.dash-title {
+  font-size: 1.2rem;
 }
