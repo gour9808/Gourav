@@ -1,0 +1,104 @@
+stages:
+    - prepare
+    - deploy
+    - package
+    - publish
+
+#variables:
+ #   PACKAGE_VERSION: "version" 
+    
+before_script:
+    - "echo $CIM_NPM_CONFIG > ~/.npmrc"
+   
+get_version:
+    image: maven:3-jdk-8
+    stage: prepare
+    script:
+        - apt-get update && apt-get install -yqq jq
+        - export PACKAGE_VERSION=$(cat package.json | jq -r .version)
+        - export COMMIT_HASH=${CI_COMMIT_SHA:0:7}
+        - echo "export PACKAGE_VERSION="$(echo "$PACKAGE_VERSION")"" >> variables
+        - echo "export COMMIT_HASH="$(echo "$COMMIT_HASH")"" >> variables
+    artifacts:
+      paths:
+      - variables
+# This file is a template, and might need editing before it works on your project.
+# Official framework image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/node/tags/
+image: node:latest
+
+# This folder is cached between builds
+# http://docs.gitlab.com/ce/ci/yaml/README.html#cache
+cache:
+  paths:
+  - node_modules/
+
+build_test:
+  stage: deploy
+  environment: Test
+  only:
+    - development
+  script:
+    - rm ./package-lock.json
+    - npm install
+    - npm rebuild node-sass
+    - npm run test
+  artifacts:
+    paths:
+        - dist
+
+build_production:
+  stage: deploy
+  environment: Production
+  only:
+    - master
+  script:
+    - rm ./package-lock.json
+    - npm install
+    - npm run build
+
+docker_build_master:
+    image: docker:latest
+    services:
+        - docker:dind
+    stage: package
+    script:
+        - mkdir -p ~/.docker
+        - echo $CIM_DOCKER_AUTH_CONFIG > ~/.docker/config.json
+        - source variables
+        - docker build -t docker-reg.widas.de/carbook-data-manager:vP$PACKAGE_VERSION-$COMMIT_HASH -f Dockerfile .
+        - docker push docker-reg.widas.de/carbook-data-manager:vP$PACKAGE_VERSION-$COMMIT_HASH
+    only:
+        - master
+
+docker_build_dev:
+    image: docker:latest
+    services:
+        - docker:dind
+    stage: package
+    script:
+        - ls
+        - mkdir -p ~/.docker
+        - echo $CIM_DOCKER_AUTH_CONFIG > ~/.docker/config.json
+        - source variables
+        - docker build -t docker-reg.widas.de/carbook-data-manager:v$PACKAGE_VERSION-$COMMIT_HASH -f Dockerfile .
+        - docker push docker-reg.widas.de/carbook-data-manager:v$PACKAGE_VERSION-$COMMIT_HASH
+    only:
+        - development
+
+
+marathon_publish_test:
+    image: gempesaw/curl-jq
+    stage: publish
+    environment: Test
+    only:
+        - development
+    script:
+        - echo $CIM_MARATHON_JSON > marathon-template.json
+        - source variables
+        - cat marathon-template.json | jq ".container.docker.image = \"docker-reg.widas.de/carbook-data-manager:v$PACKAGE_VERSION-$COMMIT_HASH\"" > marathon-service.json
+        - cat marathon-service.json
+        - 'cat marathon-service.json | curl -H "Content-type: application/json" -v -X PUT -d @- http://192.168.2.135/service/carbook-test-wm/v2/apps/carbook-data-manager?force=true'
+    artifacts:
+        paths:
+            - marathon-service.json
