@@ -1,0 +1,5 @@
+<div fxLayout="column" class="input-group">
+    <span class="input-label">{{label}}</span>
+    <p-autoComplete [(ngModel)]="value" [suggestions]="results" (onSelect)="selected($event)" field="description" (completeMethod)="search($event)"></p-autoComplete>
+</div>
+<input hidden=true #searchBox>

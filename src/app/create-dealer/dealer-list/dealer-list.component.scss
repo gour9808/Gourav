@@ -1,0 +1,47 @@
+.ui-accordion .ui-accordion-header a {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.75);
+    text-decoration: none;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding: 0;
+}
+
+.ui-widget-header .ui-state-active a,
+.ui-widget-content .ui-state-active a,
+.ui-state-active a {
+    &:hover {
+        background: #f1f1f1;
+    }
+}
+
+.ui-accordion .ui-accordion-header {
+    background: white;
+}
+
+.ui-accordion-header.ui-state-default {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.ui-accordion-header.ui-state-default.ui-corner-all {
+    border-radius: 0;
+}
+
+p-accordiontab {
+    &:first-child {
+        .ui-accordion.ui-accordion-header {
+            border-top: none;
+        }
+    }
+}
+
+.trim {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 80%;
+    display: inline-block;
+}

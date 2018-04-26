@@ -1,4 +1,4 @@
-<div class="card md-whiteframe-z1" fxLayout="column">
+<div class="card md-whiteframe-z1" fxFlex fxLayout="column">
   <div class="card-title" fxLayoutAlign="start center" fxLayout="row" fxLayoutGap="1%">
     <i class="material-icons" *ngIf="showBack" (click)="back()">arrow_back</i>
     <span fxFlex>{{title}}</span>
@@ -7,5 +7,6 @@
       <i class="material-icons ripple" *ngIf="expanded" (click)="expanded = false">expand_less</i>
     </div>
   </div>
+  <app-loader *ngIf="searching"></app-loader>
     <ng-content *ngIf="expanded" class="card-body"></ng-content>
 </div>

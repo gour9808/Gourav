@@ -1,0 +1,96 @@
+<div  fxLayout="row">
+<app-card title="Search Vehicle" [showExpansion]="true" expanded=true style="width: 100%;">
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <app-input-field-text label="Make" placeholder="Enter Vehicle Make"  [(model)]="search.make"></app-input-field-text>
+        <app-input-field-text label="Model" placeholder="Enter Vehicle Model"  [(model)]="search.model"></app-input-field-text>
+        <app-input-field-text label="Variant" placeholder="Enter Vehicle Variant" [(model)]="search.variant"></app-input-field-text>
+        <app-input-field-options label="Country" placeH="Select Country" [reset]="reset" [list]="countries" (selected)="search.country = $event"></app-input-field-options>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="2%" style="margin:12px">
+        <app-button (click)="resetSearch()" title="Reset"></app-button>
+        <app-button [disabled]="!goForSearch()" (click)="searchVehicle()" title="Search"></app-button>
+      </div>
+    </div>
+</app-card>
+  
+</div>  
+
+
+<div fxLayout="row">
+  <div fxLayout="column">
+    <app-card title=" Source Vechicle List" expanded=true>
+      <p-dataTable [value]="vehicles" scrollable="true" scrollHeight="scrollH" [rows]="5" [paginator]="true" [pageLinks]="3" [loading]="loadingVehicles"
+        selectionMode="single" (onRowSelect)="vehicleSelected($event)">
+        <p-column field="make" header="Make" [sortable]="true"></p-column>
+        <p-column field="model" header="Model" [sortable]="true"></p-column>
+        <p-column field="variant" header="Variant"></p-column>
+        <p-column field="countryCode" header="Country">
+          <ng-template let-col let-log="rowData" pTemplate="body">
+            <div>{{getCountry(log[col.field])}}</div>
+          </ng-template>
+        </p-column>
+
+        <p-column [style]="{'width':'38px'}">
+          <ng-template let-col let-log="rowData" pTemplate="body">
+            <span style="cursor:pointer" fxLayout="row" fxLayoutAlign="start center" (click)="vehicleDeleted(log)">
+<i class="material-icons">delete</i>
+</span>
+</ng-template>
+</p-column>
+<ng-template let-car pTemplate="rowexpansion">
+  <div fxLayout="row">
+    this is the expanded row with data
+  </div>
+</ng-template>
+</p-dataTable>
+</app-card>
+
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2%" style="margin:12px">
+
+</div>
+<toaster-container></toaster-container>
+</div>
+<div fxLayout="column">
+
+
+  <app-card title=" Destination Vechicle List" expanded=true>
+    <p-dataTable [value]="vehicles" scrollable="true" scrollHeight="scrollH" [rows]="5" [paginator]="true" [pageLinks]="3" [loading]="loadingVehicles"
+      selectionMode="single" (onRowSelect)="vehicleSelected($event)">
+      <p-column field="make" header="Make" [sortable]="true"></p-column>
+      <p-column field="model" header="Model" [sortable]="true"></p-column>
+      <p-column field="variant" header="Variant"></p-column>
+      <p-column field="countryCode" header="Country">
+        <ng-template let-col let-log="rowData" pTemplate="body">
+          <div>{{getCountry(log[col.field])}}</div>
+        </ng-template>
+      </p-column>
+       <p-column styleClass="col-button">
+    
+    <ng-template let-vehicle="rowData" pTemplate="body">
+      <button type="button" label="Clone"  (click)="cloneParts(vehicle)"  pButton icon="fa-check"></button>
+    </ng-template>
+  </p-column>
+
+
+      <p-column [style]="{'width':'38px'}">
+        <ng-template let-col let-log="rowData" pTemplate="body">
+          <span style="cursor:pointer" fxLayout="row" fxLayoutAlign="start center" (click)="vehicleDeleted(log)">
+<i class="material-icons">delete</i>
+</span>
+</ng-template>
+</p-column>
+<ng-template let-car pTemplate="rowexpansion">
+  <div fxLayout="row">
+    this is the expanded row with data
+  </div>
+</ng-template>
+</p-dataTable>
+</app-card>
+
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2%" style="margin:12px">
+
+</div>
+<toaster-container></toaster-container>
+</div>
+</div>

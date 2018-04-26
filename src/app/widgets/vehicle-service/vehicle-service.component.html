@@ -1,0 +1,13 @@
+<div fxLayout="column">
+  <app-input-field-number label="Service Number" placeholder="Enter Service Number" errorMessage="Invalid Entry" [(model)]="serviceItem.serviceNumber"></app-input-field-number>
+  <div fxLayout="row">
+    <app-input-field-number label="Distance (KM)" placeholder="Enter Service Distance" [(model)]="serviceItem.distance"></app-input-field-number>
+    <app-input-field-number label="Duration (Days)" placeholder="Enter Service Duration" [(model)]="serviceItem.distance"></app-input-field-number>
+  </div>
+  <app-input-field-options label="Service Type" placeH="Choose Service type" [list]="serviceType" (selected)="service.serviceType = $event"></app-input-field-options>
+  <app-input-field-number label="Estimated Cost" placeholder="Enter Estimated cost of service" [(model)]="serviceItem.price"></app-input-field-number>
+  <app-input-field-multiple label="Jobs" placeholder="Enter Jobs undertaken in the service" [(model)]="serviceItem.jobs"></app-input-field-multiple>
+  <div>
+    <app-button class="input-group" [disabled]="!goForService()" title="Add" (click)="onAdd()"></app-button>
+  </div>
+</div>
