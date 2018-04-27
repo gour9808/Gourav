@@ -1,7 +1,8 @@
-<div class="card small" fxLayout="row" layout-padding fxLayoutAlign="start center">
-    <i class="material-icons dash">{{icon}}</i>
-    <div fxLayout="column" flex fxLayoutAlign="end center">
-        <span class="dash-number">{{counter}}</span>
+<div class="card" fxLayout="row" [ngStyle]="{'background-color': background}" layout-padding fxLayoutAlign="start center">
+    <i class="mdi dash" [ngClass]='icon'></i>
+    <div fxLayout="column" fxFlex fxLayoutAlign="center center">
+        <span class="dash-number">{{subtitle}}</span>
         <span class="dash-title">{{title}}</span>
+        <span class="dash-number">{{sub}}</span>
     </div>
 </div>

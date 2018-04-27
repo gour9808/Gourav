@@ -1,5 +1,0 @@
-<!--<app-vehicle-search *ngIf="!isEdit" (searchResults)="vehicles" (showDialog)="showDialog = $event"></app-vehicle-search>-->
-<app-vehicle-list [vehicles]="vehicles" *ngIf="!isEdit" (showDialog)="showDialog = $event" (onVehicleSelected)="showEdit($event)"></app-vehicle-list>
-<app-vehicle-detail *ngIf="isEdit" (showDialog)="showDialog = $event" [editData]="editVehicle" (cancel)="isEdit = false"></app-vehicle-detail>
-<app-circular-progress [showDialog]="showDialog" message="Please Wait"></app-circular-progress>
-<toaster-container></toaster-container>

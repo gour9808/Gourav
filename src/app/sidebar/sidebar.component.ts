@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output  } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
 
 @Component({
@@ -10,13 +10,14 @@ export class SidebarComponent implements OnInit {
 
   @Input() menu: Array<Object>;
   version = environment.version;
-  userInfo: any = {};
+
   constructor() { }
 
   ngOnInit() {
     console.log("Init Sidebar");
     console.log(this.menu);
-}
 
- 
+  }
+
+
 }
