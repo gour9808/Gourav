@@ -3,17 +3,13 @@ import { Constants } from '../../service/constants';
 import { Subject } from 'rxjs/Subject';
 import * as moment from 'moment';
 import * as _ from 'lodash';
-import { UserService } from '../../service/user.service';
 import * as cbv from '../../models/VehicleDetail';
-import * as consts from '../../models/DropValues';
 import { VehicleService } from '../../service/vehicle.service';
 import { vehicles } from '../../app.globals';
 import { ToasterService } from 'angular2-toaster';
 import { VehicleServiceComponent } from '../../widgets/vehicle-service/vehicle-service.component';
-import { VehicleServiceDirective } from '../../directives/vehicle-service.directive';
 import { Communicator } from '../../service/communicator.service';
 import { Utils } from "../../utils/utils";
-import { DataStorageService } from '../../service/data-storage.service';
 
 @Component({
   selector: 'app-vehicle-create',
@@ -35,31 +31,18 @@ export class VehicleCreateComponent implements OnInit {
   val: any = "some www";
   @ViewChild('vehicleNameInput') vehicleNameInput: ElementRef;
   @ViewChild('vin') vinInput: ElementRef;
-  @ViewChild(VehicleServiceDirective) adHost: VehicleServiceDirective;
-  engineType = consts.engineType;
-  bodyType = consts.bodyType;
-  chargerType = consts.chargerType;
-  driveTrain = consts.driveTrain;
-  instrumentType = consts.instrumentType;
-  serviceType = consts.serviceType;
-  transmissionType = consts.transmissionType;
-  countries = consts.countries;
   test: any[] = new Array<any>();
   serviceCount: number = 0;
   displayPartDialog;
   editPart: cbv.Vehicle.Part = new cbv.Vehicle.Part();
   vehicle: cbv.Vehicle.VehicleDetail = new cbv.Vehicle.VehicleDetail();
   constructor(private service: VehicleService, private toasterService: ToasterService, private _componentFactoryResolver: ComponentFactoryResolver,
-    private storage: DataStorageService) {
+   ) {
   }
 
   ngOnInit() {
     console.log("Init Vehicle Create");
-    if (!this.storage.isEmpty) {
-      console.log(this.storage.getClone);
-      this.vehicle = _.merge(new cbv.Vehicle.VehicleDetail(), this.storage.getClone);
-      this.storage.clearClone();
-    }
+   
   }
 
   log(event) {

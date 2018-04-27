@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
-import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -21,23 +20,12 @@ export class ToolbarComponent implements OnInit {
   showFleet:boolean = false;
   showProfile:boolean = false;
 
-  constructor(private router: Router , private userservice : UserService) { }
+  constructor(private router: Router ) { }
 
   ngOnInit() {
     console.log("Init Toolbar");
-    this.getUserInfo();
   }
 
-  checkIfOrgExists() {
-    return (localStorage.getItem("orgId") != null && localStorage.getItem("orgId") != undefined);
-  }
-
-  getUserInfo() {
-    this.userservice.getUserInfo().subscribe(info => {
-      this.userInfo = info;
-      console.log("User info is", this.userInfo);
-    });
-  }  
 
   toggle() {
     this.toggleSidenav.emit();
@@ -56,7 +44,5 @@ export class ToolbarComponent implements OnInit {
     this.showPopout = false;
   }
 
-  logout() {
-    this.router.navigate(['/auth'], { replaceUrl: true });
-  }
+  
 }
