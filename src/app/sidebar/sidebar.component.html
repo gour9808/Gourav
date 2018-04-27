@@ -1,16 +1,21 @@
 <div class="sidebar" fxLayout="column">
   <div class="app-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5%">
     <img class="logo" src="assets/logo.png" />
-    <span class="app-name"><a href="https://www.carbookplus.com" id="cbfm-goto-carbookplus.com" target="_blank">CarbookPlus</a></span>
+    <span class="app-name"></span>
   </div>
-  <a *ngFor="let menuItem of menu;  let i = index" [attr.id]="'cbfm-sidenav-menu-' + i" [routerLink]="menuItem.path" [queryParams]="menuItem.query"
-    routerLinkActive="active" [class.disabled]="!menuItem.active" class="item">
-    <div fxLayout="row" fxLayoutAlign="start center" fxFill>
-      <i class="material-icons">{{menuItem.icon}}</i>
-      <span>{{menuItem.name}}</span>
-    </div>
-  </a>
-  <span fxFlex></span>
-  <span class="footer">Copyright © 2017 <a href="https://www.carbookplus.com"  id="cbfm-goto-carbookplus.com" target="_blank">CarbookPlus <span class="version">(v{{version}})</span></a>
-  </span>
+  <ul class="nav navbar-nav sider-navbar">
+    <li id="profile" style="width: 100%;">
+<figure class="profile-userpic">
+  
+  <img  src="assets/logo.png" class="img-responsive" alt="Profile Picture">
+</figure>
+<div class="profile-usertitle">
+  <div class="profile-usertitle-name">Gourav Sharma </div>
+  <div class="profile-usertitle-title">9983419808</div>
+</div>
+</li>
+<a *ngFor="let menuItem of menu">
+  <app-list-item *ngIf="!menuItem.children && menuItem.active" [label]="menuItem.name" [icon]="menuItem.icon" [path]="menuItem.path"></app-list-item>
+</a>
+</ul>
 </div>

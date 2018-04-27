@@ -1,6 +1,0 @@
-<div fxLayout="column" class="input-group" fxFlex>
-  <span class="input-label">Add Parts </span>
-  <p-autoComplete id="cbfm-select-make-&-model" placeholder="Enter Part Name" [(ngModel)]="parts" (onSelect)="onPartSelected($event)"
-    [suggestions]="results" [multiple]="true" (completeMethod)="searchParts($event)" field="partName">
-  </p-autoComplete>
-</div>

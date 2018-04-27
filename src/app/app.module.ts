@@ -4,21 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
-import { DataTableModule, SharedModule, DropdownModule, TooltipModule,CheckboxModule, DataGridModule,AutoCompleteModule,GMapModule, DialogModule, CalendarModule, RadioButtonModule, AccordionModule, TabViewModule, ChipsModule } from 'primeng/primeng';
+import { DataTableModule, SharedModule, DropdownModule, TooltipModule, CheckboxModule, DataGridModule, AutoCompleteModule, GMapModule, DialogModule, CalendarModule, RadioButtonModule, AccordionModule, TabViewModule, ChipsModule } from 'primeng/primeng';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ToasterModule, ToasterService } from 'angular2-toaster';
-import { AgmCoreModule } from "@agm/core";
-
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ContainerComponent } from './container/container.component';
-import { VehicleComponent } from './vehicle/vehicle.component';
-import { VehicleListComponent } from './vehicle/vehicle-list/vehicle-list.component';
-import { VehicleDetailComponent } from './vehicle/vehicle-detail/vehicle-detail.component';
-import { VehicleCreateComponent } from './vehicle/vehicle-create/vehicle-create.component';
-import { DataLoaderComponent } from './data-loader/data-loader.component';
 import { LoaderComponent } from './widgets/loader/loader.component';
 import { CircularProgressComponent } from './widgets/circular-progress/circular-progress.component';
 
@@ -27,34 +19,36 @@ import { InputFieldNumberComponent } from './widgets/input-field-number/input-fi
 import { InputFieldBooleanComponent } from './widgets/input-field-boolean/input-field-boolean.component';
 import { InputFieldOptionsComponent } from './widgets/input-field-options/input-field-options.component';
 import { InputFieldMultipleComponent } from './widgets/input-field-multiple/input-field-multiple.component';
-import { VehicleService } from './service/vehicle.service';
-import { VehicleListEditComponent } from './vehicle/vehicle-list-edit/vehicle-list-edit.component';
-import { TabbarComponent } from './tabbar/tabbar.component';
-import { VehicleSearchComponent } from './vehicle/vehicle-search/vehicle-search.component';
-import { Communicator } from "./service/communicator.service";
+
 import { CardComponent } from './widgets/card/card.component';
 import { ButtonComponent } from './widgets/button/button.component';
-import { VehicleServiceComponent } from './widgets/vehicle-service/vehicle-service.component';
 import { OverlayPanelModule } from "primeng/components/overlaypanel/overlaypanel";
-import { InputFieldAutoCompleteComponent } from './widgets/input-field-auto-complete/input-field-auto-complete.component';
-import { MultiSelectModule } from 'primeng/primeng';
 
+import { MultiSelectModule } from 'primeng/primeng';
 import { SizePipe } from './utils/pipes/size.pipe';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { DashTileComponent } from './widgets/dash-tile/dash-tile.component';
+import { MenuItemComponent } from './widgets/menu-item/menu-item.component';
+import { ListItemComponent } from './list-item/list-item.component';
+import { ChartModule } from 'primeng/primeng';
+import { LoginComponent } from './login/login.component';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 
 import { InputFieldMultipleOptionComponent } from './widgets/input-field-multiple-option/input-field-multiple-option.component';
-import { InputFieldAutocompleteAddressComponent } from './widgets/input-field-autocomplete-address/input-field-autocomplete-address.component';
+import { DataLoaderComponent } from './data-loader/data-loader.component';
+import { SplashLoaderComponent } from './splash-loader/splash-loader.component';
+import { TableModule } from 'primeng/table'; 
+import { PlaceholdersComponent } from './widgets/placeholders/placeholders.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    DataLoaderComponent,
+    DashTileComponent,
     SidebarComponent,
     ToolbarComponent,
     ContainerComponent,
-    VehicleComponent,
-    VehicleListComponent,
-    VehicleDetailComponent,
-    VehicleCreateComponent,
     LoaderComponent,
     CircularProgressComponent,
     InputFieldTextComponent,
@@ -62,31 +56,28 @@ import { InputFieldAutocompleteAddressComponent } from './widgets/input-field-au
     InputFieldBooleanComponent,
     InputFieldOptionsComponent,
     InputFieldMultipleComponent,
-    VehicleListEditComponent,
-    TabbarComponent,
-    VehicleSearchComponent,
     CardComponent,
     ButtonComponent,
-    VehicleServiceComponent,
-    InputFieldAutoCompleteComponent,
-    SizePipe,
     InputFieldMultipleOptionComponent,
-    InputFieldAutocompleteAddressComponent,
+    SizePipe,
+    DashboardComponent,
+    MenuItemComponent,
+    ListItemComponent,
+    LoginComponent,
+    DataLoaderComponent,
+    SplashLoaderComponent,PlaceholdersComponent
     
+
+
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
-    AgmCoreModule.forRoot({
-      apiKey: "AIzaSyDd07ZUbURPyQfbjeLpXcOMQsn2znqEcok",
-      libraries: ["places"]
-    }),
     BrowserModule,
-    AgmCoreModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpModule,
+    HttpModule, ChartModule,
     DataTableModule,
-    SharedModule,
+    SharedModule,TableModule,
     DropdownModule,
     TooltipModule,
     AutoCompleteModule,
@@ -96,14 +87,16 @@ import { InputFieldAutocompleteAddressComponent } from './widgets/input-field-au
     AccordionModule,
     TabViewModule,
     ChipsModule,
-    ToasterModule,
+   
     OverlayPanelModule,
     FlexLayoutModule,
-    CheckboxModule,
-    DataGridModule,
-    GMapModule
+  CheckboxModule,
+    DataGridModule,HttpClientModule,
+    GMapModule,
+    NgxChartsModule
   ],
-  providers: [  VehicleService, Communicator],
+  providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
