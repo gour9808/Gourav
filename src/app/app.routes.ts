@@ -1,18 +1,9 @@
 import { Routes } from '@angular/router';
-
 import { ContainerComponent } from './container/container.component';
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-import { LoginComponent } from './login/login.component';
-
-import { DataLoaderComponent } from './data-loader/data-loader.component';
-
 export const appRoutes: Routes = [
-    { path: '', redirectTo: 'load', pathMatch: 'full' },
-    { path: 'auth', component: LoginComponent },
-     { path: 'load', component: DataLoaderComponent },
-
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     {
         path: 'home', component: ContainerComponent,
         children: [
@@ -23,8 +14,7 @@ export const appRoutes: Routes = [
                     { path: 'dashboard', component: DashboardComponent },
                 ]
             },
-            // { path: 'family', component: FamilyListComponent },
-            // { path: 'test', component: TestsComponent },
+
         ]
     },
 

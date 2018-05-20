@@ -1,7 +1,8 @@
-<div class="toolbar" fxLayout="row" fxLayoutAlign="start center">
-  <i class="material-icons" (click)="toggle()">menu</i>
-  <span class="title" fxFlex>{{title}}</span>
-  <div fxLayout="row" class="user-info" fxLayoutAlign="center center">
-<i class="material-icons avatar" #popOutButton routerLink="/auth" style="color:#FFFFFF;font-size:32px;">power_settings_new</i>
-</div>
-</div>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav" *ngFor = "let catagories of catagoryList ">
+      <li class="active"><a href="#">{{catagories.name}}</a></li>
+    </ul>
+  </div>
+</nav>
+

@@ -1,21 +1,13 @@
-<div class="sidebar" fxLayout="column">
-  <div class="app-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5%">
-    <img class="logo" src="assets/logo.png" />
-    <span class="app-name"></span>
+<h3 class="first">Features</h3>
+<div class="ui-g" style="width:250px;margin-bottom:10px" >
+    <div class="ui-g-12" *ngFor = "let f of feature"><p-checkbox name="group1" (onChange)= "selected($event)" (ngModelChange)="modelChange" [value]="f.name" [label]="f.name" [(ngModel)]="selectedFeatures" inputId="feature"></p-checkbox></div>
+</div>
+
+Selected Features: <span *ngFor="let feat of selectedFeatures" style="margin-right:10px">{{feat}}</span>
+
+<h3>Brands</h3>
+<div class="ui-g" style="width:250px;margin-bottom:10px">
+    <div class="ui-g-12" *ngFor = "let b of brand"><p-checkbox name="group2" (onChange)= "selected($event)" (ngModelChange)="modelChange" [value]="b.name" [label]="b.name" [(ngModel)]="selectedBrands" inputId="brand"></p-checkbox></div>
+    Selected Brands: <span *ngFor="let cat of selectedBrands" style="margin-right:10px">{{cat}} </span>
+
   </div>
-  <ul class="nav navbar-nav sider-navbar">
-    <li id="profile" style="width: 100%;">
-<figure class="profile-userpic">
-  
-  <img  src="assets/logo.png" class="img-responsive" alt="Profile Picture">
-</figure>
-<div class="profile-usertitle">
-  <div class="profile-usertitle-name">Gourav Sharma </div>
-  <div class="profile-usertitle-title">9983419808</div>
-</div>
-</li>
-<a *ngFor="let menuItem of menu">
-  <app-list-item *ngIf="!menuItem.children && menuItem.active" [label]="menuItem.name" [icon]="menuItem.icon" [path]="menuItem.path"></app-list-item>
-</a>
-</ul>
-</div>

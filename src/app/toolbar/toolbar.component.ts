@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
+import { CatagoriesService } from '../services/catagories.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -13,36 +14,27 @@ import * as _ from 'lodash';
 export class ToolbarComponent implements OnInit {
 
   @Input() title: String;
+  catagoryList : any[];
   @Output() toggleSidenav = new EventEmitter<any>();
-  @ViewChild('popOutButton') elementView: ElementRef;
   showPopout: boolean = false;
   showFleet: boolean = false;
   showProfile: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private catagories: CatagoriesService) { }
 
   ngOnInit() {
+    this.getCatagories();
     console.log("Init Toolbar");
   }
 
-  toggle() {
-    this.toggleSidenav.emit();
+
+
+  getCatagories() {
+    this.catagories.getCatagories().subscribe(res => {
+      console.log(res);
+      this.catagoryList = res;
+
+    })
   }
 
-  togglePopout() {
-    this.showPopout = !this.showPopout;
-  }
-
-  /**
-   * This is used to hide the popout when clicking anywhere else on the screen.
-   * @param event The click event
-   */
-  closePopout(event) {
-    if (!this.elementView.nativeElement.contains(event.target)) //check if the clicked target is out icon
-      this.showPopout = false;
-  }
-
-  logout() {
-    this.router.navigate(['/auth'], { replaceUrl: true });
-  }
 }
