@@ -1,61 +1,98 @@
-<p-dataView #dv [value]="products" [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="brand"
-    [sortField]="sortField" [sortOrder]="sortOrder" >
-    <p-header>
-        <div class="ui-helper-clearfix">
-            <div class="ui-g">
-                <div class="ui-g-12 ui-md-4">
-                    <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)" [autoWidth]="false" [style]="{'min-width':'15em'}"></p-dropdown>
-                </div>
-                <div class="ui-g-6 ui-md-4 filter-container">
-                    <div style="position:relative">
-                        <input type="search" pInputText placeholder="Search by brand" (keyup)="dv.filter($event.target.value)">
-                    </div>
-                </div>
-                <div class="ui-g-6 ui-md-4" style="text-align:right">
-                    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-                </div>
+<div style="height:100%" fxLayout="row">
+    <app-circular-progress [showDialog]="loadingRequest" message="please wait"></app-circular-progress>
+
+    <div fxLayout="column">
+        <h3 class="first">Features</h3>
+        <div class="ui-g" style="width:250px;margin-bottom:10px">
+            <div class="ui-g-12" *ngFor="let f of feature">
+                <p-checkbox name="group1" (onChange)="selectedFeature(f, $event)" (ngModelChange)="modelChange" [value]="f.name" [label]="f.name"
+                    [(ngModel)]="selectedFeatures" inputId="feature"></p-checkbox>
             </div>
         </div>
-    </p-header>
-    <ng-template let-product pTemplate="listItem" >
-        <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
-            <div class="ui-g-12 ui-md-3" style="text-align:center">
-                <img [src]="product.img">
+
+        Selected Features:
+        <span *ngFor="let feat of selectedFeatures" style="margin-right:10px">{{feat}}</span>
+
+        <h3>Brands</h3>
+        <div class="ui-g" style="width:250px;margin-bottom:10px">
+            <div class="ui-g-12" *ngFor="let b of brand">
+                <p-checkbox name="group2" (onChange)="selectedBrand(b, $event)" (ngModelChange)="modelChange" [value]="b.name" [label]="b.name"
+                    [(ngModel)]="selectedBrands" inputId="brand"></p-checkbox>
             </div>
-            <div class="ui-g-12 ui-md-8 product-details" (onHover)="goTo()">
-                <div class="ui-g">
-                    <div class="ui-g-2 ui-sm-6">Name: </div>
-                    <div class="ui-g-10 ui-sm-6"><b>{{product.name}}</b></div>
+            Selected Brands:
+            <span *ngFor="let cat of selectedBrands" style="margin-right:10px">{{cat}} </span>
 
-                    <div class="ui-g-2 ui-sm-6">price: </div>
-                    <div class="ui-g-10 ui-sm-6"><b>{{product.price}}</b></div>
-
-
-                </div>
-            </div>
-            <div class="ui-g-12 ui-md-1 search-icon">
-                <button pButton type="button" icon="fa-search" (click)="selectProduct(product)"></button>
-            </div>
         </div>
-    </ng-template>
-    <ng-template let-product pTemplate="gridItem">
-        <div style="padding:.5em" class="ui-g-12 ui-md-3">
-            <p-panel [header]="product.name" [style]="{'text-align':'center'}">
-                <img [src]="product.img">
-                <hr class="ui-widget-content" style="border-top:0">
-                <button pButton type="button" icon="fa-search" (click)="selectProduct(product)" style="margin-top:0"></button>
-            </p-panel>
-        </div>
-    </ng-template>
-</p-dataView>
-
-<p-dialog header="Product Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" width="400" (onAfterHide)="onDialogHide()">
-    <div class="ui-g" *ngIf="selectedCar">
-        <div class="ui-g-12" style="text-align:center">
-            <!-- <img src="assets/showcase/images/demo/car/{{selectedCar.brand}}.png"> -->
-        </div>
-        <div class="ui-g-4">Description: </div>
-        <div class="ui-g-8">{{selectedCar.description}}</div>
 
     </div>
-</p-dialog>
+    <div fxLayout="column">
+        <p-dataView #dv [value]="products" [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="brand" [sortField]="sortField"
+            [sortOrder]="sortOrder">
+            <p-header>
+                <div class="ui-helper-clearfix">
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-md-4">
+                            <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)" [autoWidth]="false"
+                                [style]="{'min-width':'15em'}"></p-dropdown>
+                        </div>
+                        <div class="ui-g-6 ui-md-4 filter-container">
+                            <div style="position:relative">
+                                <input type="search" pInputText placeholder="Search by brand" (keyup)="dv.filter($event.target.value)">
+                            </div>
+                        </div>
+                        <div class="ui-g-6 ui-md-4" style="text-align:right">
+                            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                        </div>
+                    </div>
+                </div>
+            </p-header>
+            <ng-template let-product pTemplate="listItem">
+                <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+                    <div class="ui-g-12 ui-md-3" style="text-align:center">
+                        <img [src]="product.img">
+                    </div>
+                    <div class="ui-g-12 ui-md-8 product-details" (onHover)="goTo()">
+                        <div class="ui-g">
+                            <div class="ui-g-2 ui-sm-6">Name: </div>
+                            <div class="ui-g-10 ui-sm-6">
+                                <b>{{product.name}}</b>
+                            </div>
+
+                            <div class="ui-g-2 ui-sm-6">price: </div>
+                            <div class="ui-g-10 ui-sm-6">
+                                <b>{{product.price}}</b>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-1 search-icon">
+                        <button pButton type="button" icon="fa-search" (click)="selectProduct(product)"></button>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template let-product pTemplate="gridItem">
+                <div style="padding:.5em" class="ui-g-12 ui-md-3">
+                    <p-panel [header]="product.name" [style]="{'text-align':'center'}">
+                        <img [src]="product.img">
+                        <hr class="ui-widget-content" style="border-top:0">
+                        <button pButton type="button" icon="fa-search" (click)="selectProduct(product)" style="margin-top:0"></button>
+                    </p-panel>
+                </div>
+            </ng-template>
+        </p-dataView>
+
+        <p-dialog header="Product Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" width="400"
+            (onAfterHide)="onDialogHide()">
+            <div class="ui-g" *ngIf="selectedCar">
+                <div class="ui-g-12" style="text-align:center">
+                    <!-- <img src="assets/showcase/images/demo/car/{{selectedCar.brand}}.png"> -->
+                </div>
+                <div class="ui-g-4">Description: </div>
+                <div class="ui-g-8">{{selectedCar.description}}</div>
+
+            </div>
+        </p-dialog>
+    </div>
+
+</div>

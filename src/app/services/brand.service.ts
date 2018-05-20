@@ -14,6 +14,6 @@ export class BrandService {
   }
 
   getBrandById(id) {
-    return this.http.get(Constants.GET_BRAND_BY_ID)
+    return this.http.get(Constants.GET_PRODUCTS_BY_ID(id))
   }
 }
